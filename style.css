@@ -1197,29 +1197,22 @@ footer {
     overflow: hidden;
     flex-shrink: 0;
     min-height: 140px;
-    /* fond bleu lavande, distinct de la sidebar grise */
-    background: linear-gradient(180deg, #e3e9f5, #d7deee);
-}
-
-/* Accent décoratif bleu marine — élargi pour plus de contraste
-   au-dessus du nom, sans jamais toucher le texte */
-.cv-header::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -40px;
-    width: 300px;
-    height: 100%;
-    background: linear-gradient(135deg, #3b4a6b, #1c2942);
-    clip-path: polygon(0 0, 100% 0, 42% 100%, 0 100%);
-    z-index: 0;
+    /* Diagonale bleu marine -> lavande via un dégradé à paliers nets
+       (remplace le clip-path, mal supporté par html2canvas lors de l'export PDF) */
+    background: linear-gradient(
+        100deg,
+        #1c2942 0%,
+        #3b4a6b 27%,
+        #e3e9f5 27%,
+        #d7deee 100%
+    );
 }
 
 .cv-header h1,
 .cv-header .cv-title {
     position: relative;
     z-index: 2;
-    margin-left: 170px;
+    margin-left: 150px;
 }
 
 .cv-header h1 {
