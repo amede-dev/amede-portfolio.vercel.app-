@@ -1186,29 +1186,49 @@ footer {
     box-sizing: border-box;
 }
 
+/* --- En-tête avec forme diagonale à deux tons ---
+   ::before = bande claire (transition sidebar -> marine)
+   ::after  = triangle marine principal
+   Les deux clip-path partagent le même angle pour s'emboîter
+   sans laisser d'espace blanc entre eux.
+========================================================== */
+
 .cv-header {
     position: relative;
-    padding: 40px 40px 20px;
+    padding: 40px 40px 20px 55px;
     overflow: hidden;
     flex-shrink: 0;
+    min-height: 150px;
 }
 
 .cv-header::before {
     content: "";
     position: absolute;
     top: 0;
+    left: -40px;
     right: 0;
-    left: 0;
-    height: 120px;
-    background: linear-gradient(135deg, #3b4a6b, #1e293b);
-    clip-path: polygon(30% 0, 100% 0, 100% 100%, 0% 100%);
+    height: 100%;
+    background: linear-gradient(135deg, #cdd7ea, #b9c6de);
+    clip-path: polygon(0 0, 55% 0, 30% 100%, 0% 100%);
     z-index: 0;
+}
+
+.cv-header::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -40px;
+    right: 0;
+    height: 100%;
+    background: linear-gradient(135deg, #3b4a6b, #1c2942);
+    clip-path: polygon(30% 0, 100% 0, 100% 100%, 55% 100%);
+    z-index: 1;
 }
 
 .cv-header h1,
 .cv-header .cv-title {
     position: relative;
-    z-index: 1;
+    z-index: 2;
 }
 
 .cv-header h1 {
