@@ -249,7 +249,16 @@ if (btnDownloadCV) {
             margin: 0,
             filename: 'CV_RAKOTONANDRASANA_Amede.pdf',
             image: { type: 'jpeg', quality: 0.98 },
-            html2canvas: { scale: 2, useCORS: true },
+            html2canvas: {
+                scale: 2,
+                useCORS: true,
+                x: -9999,
+                y: 0,
+                width: 794,
+                height: 1123,
+                windowWidth: 794,
+                windowHeight: 1123
+            },
             jsPDF: { unit: 'px', format: [794, 1123], orientation: 'portrait' }
         };
 
