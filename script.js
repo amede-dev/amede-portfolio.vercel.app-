@@ -245,22 +245,24 @@ if (btnDownloadCV) {
         // Mesure la hauteur RÉELLE du contenu (jamais de coupure ni d'espace vide)
         const realHeight = element.scrollHeight;
 
-        const opt = {
-            margin: 0,
-            filename: 'CV_RAKOTONANDRASANA_Amede.pdf',
-            image: { type: 'jpeg', quality: 0.98 },
-            html2canvas: {
-                scale: 2,
-                useCORS: true,
-                x: -9999,
-                y: 0,
-                width: 794,
-                height: realHeight,
-                windowWidth: 794,
-                windowHeight: realHeight
-            },
-            jsPDF: { unit: 'px', format: [794, realHeight], orientation: 'portrait' }
-        };
+       const opt = {
+    margin: 0,
+    filename: 'CV_RAKOTONANDRASANA_Amede.pdf',
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: {
+        scale: 2,
+        useCORS: true,
+        scrollX: 0,
+        scrollY: -window.scrollY,   // <-- annule le décalage de scroll
+        x: -9999,
+        y: 0,
+        width: 794,
+        height: realHeight,
+        windowWidth: 794,
+        windowHeight: realHeight
+    },
+    jsPDF: { unit: 'px', format: [794, realHeight], orientation: 'portrait' }
+};
 
         html2pdf().set(opt).from(element).save().then(() => {
             btnDownloadCV.innerHTML = originalText;
