@@ -185,38 +185,89 @@ if (menuToggle && navLinksMenu) {
 }
 
 // ===============================
-// FORMULAIRE CONTACT
+// FORMULAIRE CONTACT (EmailJS)
 // ===============================
+
+// 1) Remplace ces 3 valeurs par les tiennes, visibles sur https://dashboard.emailjs.com
+//    - PUBLIC_KEY   : Account > General > Public Key
+//    - SERVICE_ID   : Email Services > (ton service Gmail) > Service ID
+//    - TEMPLATE_ID  : Email Templates > "Contact Us" > Template ID (ex: rkxf6s7, visible dans l'URL)
+const EMAILJS_PUBLIC_KEY  = "YOUR_PUBLIC_KEY";
+const EMAILJS_SERVICE_ID  = "YOUR_SERVICE_ID";
+const EMAILJS_TEMPLATE_ID = "rkxf6s7";
+
+if (window.emailjs) {
+    emailjs.init(EMAILJS_PUBLIC_KEY);
+}
 
 const btnSend = document.querySelector(".btn-send");
 
 if (btnSend) {
     btnSend.addEventListener("click", () => {
-        const nomInput = document.querySelector('.form-input[placeholder="Nom"]');
-        const emailInput = document.querySelector('.form-input[placeholder="Email"]');
-        const msgInput = document.querySelector('.form-textarea');
+
+        const nomInput = document.getElementById("formNom");
+        const emailInput = document.getElementById("formEmail");
+        const telInput = document.getElementById("formTelephone");
+        const sujetInput = document.getElementById("formSujet");
+        const msgInput = document.getElementById("formMessage");
 
         const nom = nomInput ? nomInput.value.trim() : "";
         const email = emailInput ? emailInput.value.trim() : "";
-        const msg = msgInput ? msgInput.value.trim() : "";
+        const telephone = telInput ? telInput.value.trim() : "";
+        const sujet = sujetInput ? sujetInput.value.trim() : "";
+        const message = msgInput ? msgInput.value.trim() : "";
 
-        if (!nom || !email || !msg) { alert("Veuillez remplir tous les champs."); return; }
+        if (!nom || !email || !message) {
+            alert("Veuillez remplir au minimum le nom, l'email et le message.");
+            return;
+        }
 
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) { alert("Veuillez entrer une adresse email valide."); return; }
+        if (!emailRegex.test(email)) {
+            alert("Veuillez entrer une adresse email valide.");
+            return;
+        }
 
-        btnSend.textContent = "Message envoyé ✓";
-        btnSend.style.background = "#22c55e";
+        if (!window.emailjs) {
+            alert("Le service d'envoi n'est pas disponible pour le moment.");
+            return;
+        }
+
+        btnSend.textContent = "Envoi en cours...";
         btnSend.disabled = true;
 
-        setTimeout(() => {
-            if (nomInput) nomInput.value = "";
-            if (emailInput) emailInput.value = "";
-            if (msgInput) msgInput.value = "";
-            btnSend.textContent = "Envoyer";
-            btnSend.style.background = "";
-            btnSend.disabled = false;
-        }, 3000);
+        // Ces clés ({{nom}}, {{email}}, {{telephone}}, {{sujet}}, {{message}}) doivent
+        // correspondre exactement aux variables utilisées dans le template EmailJS.
+        const templateParams = {
+            nom: nom,
+            email: email,
+            telephone: telephone || "Non renseigné",
+            sujet: sujet || "Contact depuis le portfolio",
+            message: message
+        };
+
+        emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
+            .then(() => {
+                btnSend.textContent = "Message envoyé ✓";
+                btnSend.style.background = "#22c55e";
+
+                setTimeout(() => {
+                    if (nomInput) nomInput.value = "";
+                    if (emailInput) emailInput.value = "";
+                    if (telInput) telInput.value = "";
+                    if (sujetInput) sujetInput.value = "";
+                    if (msgInput) msgInput.value = "";
+                    btnSend.textContent = "Envoyer";
+                    btnSend.style.background = "";
+                    btnSend.disabled = false;
+                }, 3000);
+            })
+            .catch((err) => {
+                console.error("Erreur EmailJS :", err);
+                alert("Une erreur est survenue lors de l'envoi. Veuillez réessayer.");
+                btnSend.textContent = "Envoyer";
+                btnSend.disabled = false;
+            });
     });
 }
 
