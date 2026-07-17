@@ -241,7 +241,8 @@ if (btnSend) {
             email: email,
             telephone: telephone || "Non renseigné",
             sujet: "Contact depuis le portfolio",
-            message: message
+            message: message,
+            site: "Portfolio"
         };
 
         emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
