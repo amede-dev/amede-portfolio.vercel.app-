@@ -194,7 +194,7 @@ if (menuToggle && navLinksMenu) {
 //    - TEMPLATE_ID  : Email Templates > "Contact Us" > Template ID (ex: rkxf6s7, visible dans l'URL)
 const EMAILJS_PUBLIC_KEY  = "fZFTAZNpFk2pgS-2M";
 const EMAILJS_SERVICE_ID  = "service_6kamede";
-const EMAILJS_TEMPLATE_ID = "rkxf6s7";
+const EMAILJS_TEMPLATE_ID = "template_04n1u98";
 
 if (window.emailjs) {
     emailjs.init(EMAILJS_PUBLIC_KEY);
