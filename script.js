@@ -261,7 +261,8 @@ if (btnSend) {
             })
             .catch((err) => {
                 console.error("Erreur EmailJS :", err);
-                alert("Une erreur est survenue lors de l'envoi. Veuillez réessayer.");
+                const detail = (err && (err.text || err.message)) ? (err.text || err.message) : "Erreur inconnue";
+                alert("Échec de l'envoi (" + detail + "). Vérifie la configuration EmailJS.");
                 btnSend.textContent = "Envoyer";
                 btnSend.disabled = false;
             });
