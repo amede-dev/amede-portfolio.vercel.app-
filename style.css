@@ -36,6 +36,10 @@ body {
     overflow-x: hidden;
 }
 
+/* ==========================
+   NETWORK CANVAS (fond)
+========================== */
+
 #networkCanvas {
     position: fixed;
     inset: 0;
@@ -43,6 +47,10 @@ body {
     pointer-events: none;
     opacity: 0.55;
 }
+
+/* ==========================
+   CURSOR GLOW
+========================== */
 
 #cursorGlow {
     position: fixed;
@@ -55,6 +63,10 @@ body {
     z-index: 9999;
 }
 
+/* ==========================
+   PROGRESS BAR
+========================== */
+
 #progressBar {
     position: fixed;
     top: 0;
@@ -64,6 +76,10 @@ body {
     background: linear-gradient(90deg, var(--accent), var(--accent2));
     z-index: 99999;
 }
+
+/* ==========================
+   PARTICLES
+========================== */
 
 #particles {
     position: fixed;
@@ -84,6 +100,10 @@ body {
     80% { opacity: .5; }
     100% { transform: translateY(-100vh); opacity: 0; }
 }
+
+/* ==========================
+   HEADER
+========================== */
 
 header {
     position: fixed;
@@ -128,6 +148,10 @@ nav {
     color: var(--accent);
 }
 
+/* ==========================
+   MENU TOGGLE (mobile)
+========================== */
+
 .menu-toggle {
     display: none;
     flex-direction: column;
@@ -161,6 +185,10 @@ nav {
 .menu-toggle.active span:nth-child(3) {
     transform: translateY(-8px) rotate(-45deg);
 }
+
+/* ==========================
+   À PROPOS (Hero)
+========================== */
 
 #apropos {
     min-height: 100vh;
@@ -359,6 +387,10 @@ nav {
     50% { transform: translateX(-50%) translateY(8px); }
 }
 
+/* ==========================
+   SECTION GÉNÉRALE
+========================== */
+
 section {
     padding: 100px 20px;
     max-width: 1200px;
@@ -382,6 +414,10 @@ section {
     margin-top: 12px;
     font-size: 0.95rem;
 }
+
+/* ==========================
+   COMPÉTENCES
+========================== */
 
 .skills-category-grid {
     display: grid;
@@ -456,9 +492,13 @@ section {
     flex-shrink: 0;
 }
 
+/* ==========================
+   EXPÉRIENCES — TIMELINE
+========================== */
+
 .timeline {
     position: relative;
-    max-width: 1100px;
+    max-width: 800px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -468,8 +508,7 @@ section {
 .timeline::before {
     content: "";
     position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 23px;
     top: 12px;
     bottom: 12px;
     width: 2px;
@@ -478,25 +517,9 @@ section {
 
 .timeline-item {
     position: relative;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 48px minmax(0, 1fr);
+    display: flex;
     gap: 24px;
     align-items: flex-start;
-}
-
-.timeline-item .timeline-dot {
-    grid-column: 2;
-    grid-row: 1;
-}
-
-.timeline-item:nth-child(odd) .timeline-card {
-    grid-column: 1;
-    grid-row: 1;
-}
-
-.timeline-item:nth-child(even) .timeline-card {
-    grid-column: 3;
-    grid-row: 1;
 }
 
 .timeline-dot {
@@ -558,6 +581,10 @@ section {
     line-height: 1.7;
 }
 
+/* ==========================
+   FORMATION
+========================== */
+
 .formation-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -612,20 +639,14 @@ section {
     font-size: 0.85rem;
 }
 
+/* ==========================
+   PROJECTS
+========================== */
+
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
     gap: 22px;
-}
-
-.project-card {
-    background: var(--card);
-    padding: 28px 26px;
-    border-radius: 16px;
-    border: 1px solid var(--border);
-    transition: border-color .3s, transform .3s, box-shadow .3s;
-    display: flex;
-    flex-direction: column;
 }
 
 .project-group-title {
@@ -646,10 +667,21 @@ section {
     margin: 0 9px 2px 0;
     border-radius: 50%;
     background: var(--accent);
+    box-shadow: 0 0 12px rgba(59, 130, 246, .7);
 }
 
 .project-group-title-faculty {
     margin-top: 22px;
+}
+
+.project-card {
+    background: var(--card);
+    padding: 28px 26px;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    transition: border-color .3s, transform .3s, box-shadow .3s;
+    display: flex;
+    flex-direction: column;
 }
 
 .project-card:hover {
@@ -743,45 +775,9 @@ section {
     height: 13px;
 }
 
-.interests-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 22px;
-    max-width: 900px;
-    margin: 0 auto;
-}
-
-.interest-card {
-    padding: 24px 22px;
-    text-align: center;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    transition: transform .3s, border-color .3s, box-shadow .3s;
-}
-
-.interest-card:hover {
-    transform: translateY(-5px);
-    border-color: var(--accent);
-    box-shadow: 0 8px 30px rgba(59,130,246,.15);
-}
-
-.interest-icon {
-    font-size: 2rem;
-    margin-bottom: 12px;
-}
-
-.interest-card h3 {
-    color: #ffffff;
-    font-size: 1rem;
-    margin-bottom: 8px;
-}
-
-.interest-card p {
-    color: var(--muted);
-    font-size: .86rem;
-    line-height: 1.6;
-}
+/* ==========================
+   CONTACT
+========================== */
 
 .contact-subtitle {
     color: var(--muted);
@@ -890,6 +886,10 @@ section {
     transform: translateY(-2px);
 }
 
+/* ==========================
+   FOOTER
+========================== */
+
 footer {
     text-align: center;
     padding: 30px;
@@ -928,6 +928,10 @@ footer {
     color: var(--accent);
     font-weight: bold;
 }
+
+/* ==========================
+   LANGUES
+========================== */
 
 .langues-box {
     max-width: 900px;
@@ -979,6 +983,10 @@ footer {
     transition: width 1.2s ease;
 }
 
+/* ==========================
+   REVEAL
+========================== */
+
 .reveal {
     opacity: 0;
     transform: translateY(30px);
@@ -989,6 +997,10 @@ footer {
     opacity: 1;
     transform: translateY(0);
 }
+
+/* ==========================
+   RESPONSIVE
+========================== */
 
 @media (max-width: 1100px) {
     .skills-category-grid,
@@ -1078,25 +1090,8 @@ footer {
         grid-template-columns: 1fr;
     }
 
-    .interests-grid {
-        grid-template-columns: 1fr;
-    }
-
     .timeline::before {
         left: 19px;
-        transform: none;
-    }
-
-    .timeline-item {
-        display: flex;
-        gap: 24px;
-    }
-
-    .timeline-item .timeline-dot,
-    .timeline-item:nth-child(odd) .timeline-card,
-    .timeline-item:nth-child(even) .timeline-card {
-        grid-column: auto;
-        grid-row: auto;
     }
 
     .timeline-dot {
@@ -1120,6 +1115,12 @@ footer {
     }
 }
 
+/* ==========================================================
+   GABARIT CV (export PDF)
+   Positionné hors écran horizontalement (-9999px)
+   height:auto pour ne JAMAIS couper le contenu
+========================================================== */
+
 #cv-template {
     position: absolute;
     top: 0;
@@ -1133,7 +1134,10 @@ footer {
     color: #2b2b2b;
 }
 
+/* --- Sidebar GRISE (distincte du header) --- */
 .cv-sidebar {
+    position: relative;
+    overflow: hidden;
     width: 250px;
     flex-shrink: 0;
     background: linear-gradient(180deg, #ccd1d9, #b7bec9);
@@ -1141,21 +1145,54 @@ footer {
     box-sizing: border-box;
 }
 
+.cv-sidebar::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto;
+    height: 210px;
+    background: linear-gradient(135deg, #203b68, #294d83);
+    clip-path: polygon(0 0, 100% 0, 100% 55%, 0 100%);
+    box-shadow: 0 5px 12px rgba(15, 23, 42, .22);
+}
+
 .cv-photo {
+    position: relative;
+    z-index: 1;
     width: 140px;
     height: 140px;
     object-fit: cover;
     display: block;
     margin: 0 auto 24px;
+<<<<<<< HEAD
     border-radius: 6px;
     border: 3px solid #ffffff;
     outline: 3px solid #3b82f6;
     outline-offset: 2px;
     box-shadow: 0 2px 8px rgba(0,0,0,.15);
+=======
+    border-radius: 2px;
+    border: 4px solid #ffffff;
+    box-shadow: 0 7px 18px rgba(15, 23, 42, .3);
+>>>>>>> 168a79b (Corriger la position du profil dans le CV)
 }
 
 .cv-side-section {
+    position: relative;
+    z-index: 1;
     margin-bottom: 22px;
+}
+
+.cv-link-item strong {
+    flex: 0 0 28px;
+    color: #1c2942;
+    font-size: .62rem;
+    line-height: 1.5;
+}
+
+.cv-contact-logo {
+    flex: 0 0 15px;
+    color: #1c2942;
+    margin-top: 1px;
 }
 
 .cv-sidebar h4 {
@@ -1203,19 +1240,7 @@ footer {
     word-break: break-all;
 }
 
-.cv-link-item strong {
-    flex: 0 0 28px;
-    color: #1c2942;
-    font-size: .62rem;
-    line-height: 1.5;
-}
-
-.cv-contact-logo {
-    flex: 0 0 15px;
-    color: #1c2942;
-    margin-top: 1px;
-}
-
+/* --- Zone principale --- */
 .cv-main {
     flex: 1;
     display: flex;
@@ -1224,20 +1249,45 @@ footer {
     position: relative;
 }
 
+<<<<<<< HEAD
 /* ==========================
    CV HEADER — aligné sur le design du CV de Martial :
    fond blanc uni + un simple triangle bleu compact
    dans le coin supérieur gauche (au lieu du bandeau
    diagonal pleine largeur qui remontait derrière le nom).
 ========================== */
+=======
+/* --- En-tête avec forme diagonale à deux tons ---
+   ::before = triangle marine, élargi et remontant plus haut
+   pour "mordre" sur la zone au-dessus du nom, comme dans le modèle cible
+========================================================== */
+>>>>>>> 168a79b (Corriger la position du profil dans le CV)
 
 .cv-header {
     position: relative;
-    padding: 40px 40px 20px 60px;
+    padding: 34px 34px 24px 58px;
     overflow: hidden;
     flex-shrink: 0;
+<<<<<<< HEAD
     min-height: 140px;
     background: #ffffff;
+=======
+    min-height: 166px;
+    background: linear-gradient(135deg, #c8d3e2, #dce4ef);
+    box-shadow: 0 5px 14px rgba(15, 23, 42, .18);
+}
+
+.cv-header::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 306px;      /* point où la diagonale sort en haut */
+    height: 115.5px;   /* = la hauteur du point droit de la sidebar (250 * 55% côté sidebar) */
+    background: linear-gradient(135deg, #203b68, #294d83);
+    clip-path: polygon(0 0, 100% 0, 0 100%);
+    z-index: 0;
+>>>>>>> 168a79b (Corriger la position du profil dans le CV)
 }
 
 .cv-header::before {
@@ -1270,6 +1320,7 @@ footer {
 .cv-header h1 {
     font-family: Georgia, 'Times New Roman', serif;
     font-size: 1.7rem;
+    font-weight: 700;
     color: #0f172a;
     line-height: 1.3;
 }
@@ -1285,10 +1336,11 @@ footer {
     font-size: 0.9rem;
     margin-top: 6px;
     text-align: right;
+    letter-spacing: .15px;
 }
 
 .cv-body {
-    padding: 10px 40px 40px;
+    padding: 10px 40px 76px;
     flex: 1;
 }
 
@@ -1302,6 +1354,7 @@ footer {
     padding-bottom: 4px;
 }
 
+/* Le titre Profil vient se placer au bord inférieur de la diagonale. */
 .cv-body > .cv-profile-heading {
     position: relative;
     z-index: 3;
@@ -1371,6 +1424,7 @@ footer {
     text-transform: uppercase;
 }
 
+/* Impression native : le PDF conserve le vrai texte sélectionnable. */
 @media print {
     @page { size: A4 portrait; margin: 0; }
 
@@ -1396,7 +1450,12 @@ footer {
 
     .cv-sidebar,
     .cv-header,
+<<<<<<< HEAD
     .cv-header::before {
+=======
+    .cv-header::after,
+    .cv-qr-block {
+>>>>>>> 168a79b (Corriger la position du profil dans le CV)
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
     }
