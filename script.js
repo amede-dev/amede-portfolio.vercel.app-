@@ -293,45 +293,9 @@ const btnDownloadCV = document.querySelector('.btn-outline[download]');
 
 if (btnDownloadCV) {
     btnDownloadCV.addEventListener("click", (e) => {
-    e.preventDefault();
+        e.preventDefault();
 
-    const element = document.getElementById('cv-template');
-    const originalText = btnDownloadCV.innerHTML;
-    btnDownloadCV.innerHTML = "Génération...";
-
-    // On mémorise la position actuelle, puis on remonte en haut
-    const savedScrollX = window.scrollX;
-    const savedScrollY = window.scrollY;
-    window.scrollTo(0, 0);
-
-    const realHeight = element.scrollHeight;
-
-    const opt = {
-        margin: 0,
-        filename: 'CV_RAKOTONANDRASANA_Amede.pdf',
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: {
-            scale: 2,
-            useCORS: true,
-            scrollX: 0,
-            scrollY: 0,
-            x: -9999,
-            y: 0,
-            width: 794,
-            height: realHeight,
-            windowWidth: 794,
-            windowHeight: realHeight
-        },
-        jsPDF: { unit: 'px', format: [794, realHeight], orientation: 'portrait' }
-    };
-
-    html2pdf().set(opt).from(element).save().then(() => {
-        btnDownloadCV.innerHTML = originalText;
-        window.scrollTo(savedScrollX, savedScrollY); // on remet l'utilisateur où il était
-    }).catch((err) => {
-        console.error("Erreur génération PDF :", err);
-        btnDownloadCV.innerHTML = originalText;
-        window.scrollTo(savedScrollX, savedScrollY);
+        // Ouvre l'aperçu d'impression natif avec le format A4 défini en CSS.
+        window.print();
     });
-});
 }
