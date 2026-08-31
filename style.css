@@ -128,6 +128,13 @@ nav {
     color: var(--accent);
 }
 
+<<<<<<< HEAD
+=======
+/* ==========================
+   MENU TOGGLE (mobile)
+========================== */
+
+>>>>>>> aa44368 (Ajustement du CV et de la mise en page)
 .menu-toggle {
     display: none;
     flex-direction: column;
@@ -162,6 +169,13 @@ nav {
     transform: translateY(-8px) rotate(-45deg);
 }
 
+<<<<<<< HEAD
+=======
+/* ==========================
+   À PROPOS (Hero)
+========================== */
+
+>>>>>>> aa44368 (Ajustement du CV et de la mise en page)
 #apropos {
     min-height: 100vh;
     display: flex;
@@ -383,6 +397,13 @@ section {
     font-size: 0.95rem;
 }
 
+<<<<<<< HEAD
+=======
+/* ==========================
+   COMPÉTENCES
+========================== */
+
+>>>>>>> aa44368 (Ajustement du CV et de la mise en page)
 .skills-category-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -456,6 +477,13 @@ section {
     flex-shrink: 0;
 }
 
+<<<<<<< HEAD
+=======
+/* ==========================
+   EXPÉRIENCES — TIMELINE
+========================== */
+
+>>>>>>> aa44368 (Ajustement du CV et de la mise en page)
 .timeline {
     position: relative;
     max-width: 800px;
@@ -601,6 +629,31 @@ section {
     gap: 22px;
 }
 
+.project-group-title {
+    grid-column: 1 / -1;
+    margin: 8px 0 -2px;
+    padding: 0 0 9px;
+    color: #ffffff;
+    font-size: 1.05rem;
+    letter-spacing: .2px;
+    border-bottom: 1px solid rgba(59, 130, 246, .35);
+}
+
+.project-group-title::before {
+    content: "";
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin: 0 9px 2px 0;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 12px rgba(59, 130, 246, .7);
+}
+
+.project-group-title-faculty {
+    margin-top: 22px;
+}
+
 .project-card {
     background: var(--card);
     padding: 28px 26px;
@@ -702,6 +755,13 @@ section {
     height: 13px;
 }
 
+<<<<<<< HEAD
+=======
+/* ==========================
+   CONTACT
+========================== */
+
+>>>>>>> aa44368 (Ajustement du CV et de la mise en page)
 .contact-subtitle {
     color: var(--muted);
     margin-top: 10px;
@@ -848,6 +908,13 @@ footer {
     font-weight: bold;
 }
 
+<<<<<<< HEAD
+=======
+/* ==========================
+   LANGUES
+========================== */
+
+>>>>>>> aa44368 (Ajustement du CV et de la mise en page)
 .langues-box {
     max-width: 900px;
     margin: 0 auto;
@@ -898,6 +965,13 @@ footer {
     transition: width 1.2s ease;
 }
 
+<<<<<<< HEAD
+=======
+/* ==========================
+   REVEAL
+========================== */
+
+>>>>>>> aa44368 (Ajustement du CV et de la mise en page)
 .reveal {
     opacity: 0;
     transform: translateY(30px);
@@ -1022,6 +1096,15 @@ footer {
     }
 }
 
+<<<<<<< HEAD
+=======
+/* ==========================================================
+   GABARIT CV (export PDF)
+   Positionné hors écran horizontalement (-9999px)
+   height:auto pour ne JAMAIS couper le contenu
+========================================================== */
+
+>>>>>>> aa44368 (Ajustement du CV et de la mise en page)
 #cv-template {
     position: absolute;
     top: 0;
@@ -1035,7 +1118,14 @@ footer {
     color: #2b2b2b;
 }
 
+<<<<<<< HEAD
 .cv-sidebar {
+=======
+/* --- Sidebar GRISE (distincte du header) --- */
+.cv-sidebar {
+    position: relative;
+    overflow: hidden;
+>>>>>>> aa44368 (Ajustement du CV et de la mise en page)
     width: 250px;
     flex-shrink: 0;
     background: linear-gradient(180deg, #ccd1d9, #b7bec9);
@@ -1043,12 +1133,29 @@ footer {
     box-sizing: border-box;
 }
 
+<<<<<<< HEAD
 .cv-photo {
+=======
+.cv-sidebar::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto;
+    height: 210px;
+    background: linear-gradient(135deg, #203b68, #294d83);
+    clip-path: polygon(0 0, 100% 0, 100% 55%, 0 100%);
+    box-shadow: 0 5px 12px rgba(15, 23, 42, .22);
+}
+
+.cv-photo {
+    position: relative;
+    z-index: 1;
+>>>>>>> aa44368 (Ajustement du CV et de la mise en page)
     width: 140px;
     height: 140px;
     object-fit: cover;
     display: block;
     margin: 0 auto 24px;
+<<<<<<< HEAD
     border-radius: 6px;
     border: 3px solid #ffffff;
     box-shadow: 0 2px 8px rgba(0,0,0,.15);
@@ -1058,6 +1165,32 @@ footer {
     margin-bottom: 22px;
 }
 
+=======
+    border-radius: 2px;
+    border: 4px solid #ffffff;
+    box-shadow: 0 7px 18px rgba(15, 23, 42, .3);
+}
+
+.cv-side-section {
+    position: relative;
+    z-index: 1;
+    margin-bottom: 22px;
+}
+
+.cv-link-item strong {
+    flex: 0 0 28px;
+    color: #1c2942;
+    font-size: .62rem;
+    line-height: 1.5;
+}
+
+.cv-contact-logo {
+    flex: 0 0 15px;
+    color: #1c2942;
+    margin-top: 1px;
+}
+
+>>>>>>> aa44368 (Ajustement du CV et de la mise en page)
 .cv-sidebar h4 {
     font-size: 0.78rem;
     letter-spacing: 1px;
@@ -1103,11 +1236,16 @@ footer {
     word-break: break-all;
 }
 
+<<<<<<< HEAD
+=======
+/* --- Zone principale --- */
+>>>>>>> aa44368 (Ajustement du CV et de la mise en page)
 .cv-main {
     flex: 1;
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
+<<<<<<< HEAD
 }
 
 .cv-header {
@@ -1123,6 +1261,49 @@ footer {
         #e3e9f5 27%,
         #d7deee 100%
     );
+=======
+    position: relative;
+}
+
+/* --- En-tête avec forme diagonale à deux tons ---
+   ::before = triangle marine, élargi et remontant plus haut
+   pour "mordre" sur la zone au-dessus du nom, comme dans le modèle cible
+========================================================== */
+
+.cv-header {
+    position: relative;
+    padding: 34px 34px 24px 58px;
+    overflow: hidden;
+    flex-shrink: 0;
+    min-height: 166px;
+    background: linear-gradient(135deg, #c8d3e2, #dce4ef);
+    box-shadow: 0 5px 14px rgba(15, 23, 42, .18);
+}
+
+.cv-header::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 306px;      /* point où la diagonale sort en haut */
+    height: 115.5px;   /* = la hauteur du point droit de la sidebar (250 * 55% côté sidebar) */
+    background: linear-gradient(135deg, #203b68, #294d83);
+    clip-path: polygon(0 0, 100% 0, 0 100%);
+    z-index: 0;
+}
+
+.cv-header::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 100%;
+    height: 58px;
+    background: #ffffff;
+    clip-path: polygon(0 0, 100% 78%, 100% 100%, 0 100%);
+    opacity: .96;
+    z-index: 1;
+>>>>>>> aa44368 (Ajustement du CV et de la mise en page)
 }
 
 .cv-header h1,
@@ -1135,6 +1316,10 @@ footer {
 .cv-header h1 {
     font-family: Georgia, 'Times New Roman', serif;
     font-size: 1.7rem;
+<<<<<<< HEAD
+=======
+    font-weight: 700;
+>>>>>>> aa44368 (Ajustement du CV et de la mise en page)
     color: #0f172a;
     line-height: 1.3;
 }
@@ -1150,10 +1335,18 @@ footer {
     font-size: 0.9rem;
     margin-top: 6px;
     text-align: right;
+<<<<<<< HEAD
 }
 
 .cv-body {
     padding: 10px 40px 40px;
+=======
+    letter-spacing: .15px;
+}
+
+.cv-body {
+    padding: 10px 40px 76px;
+>>>>>>> aa44368 (Ajustement du CV et de la mise en page)
     flex: 1;
 }
 
@@ -1167,6 +1360,33 @@ footer {
     padding-bottom: 4px;
 }
 
+<<<<<<< HEAD
+=======
+/* Le titre Profil vient se placer au bord inférieur de la diagonale. */
+.cv-body > .cv-profile-heading {
+    position: relative;
+    z-index: 3;
+    margin-top: -46px;
+    padding-top: 8px;
+    background: transparent;
+}
+
+.cv-project-group {
+    margin-bottom: 8px;
+}
+
+.cv-project-group h4 {
+    margin: 8px 0 3px;
+    color: #294d83;
+    font-size: 0.78rem;
+    line-height: 1.3;
+}
+
+.cv-project-group p {
+    margin-bottom: 6px;
+}
+
+>>>>>>> aa44368 (Ajustement du CV et de la mise en page)
 .cv-body p {
     font-size: 0.8rem;
     line-height: 1.55;
@@ -1179,3 +1399,74 @@ footer {
     font-style: normal;
     font-size: 0.76rem;
 }
+<<<<<<< HEAD
+=======
+
+.cv-qr-block {
+    position: absolute;
+    right: 28px;
+    bottom: 22px;
+    z-index: 4;
+    width: 82px;
+    padding: 5px;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    text-align: center;
+    box-shadow: 0 2px 7px rgba(15, 23, 42, .12);
+}
+
+#cv-qr-code {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 3px;
+}
+
+#cv-qr-code img,
+#cv-qr-code canvas {
+    display: block;
+    width: 70px !important;
+    height: 70px !important;
+}
+
+.cv-qr-block span {
+    display: block;
+    color: #1c2942;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .4px;
+    text-transform: uppercase;
+}
+
+/* Impression native : le PDF conserve le vrai texte sélectionnable. */
+@media print {
+    @page { size: A4 portrait; margin: 0; }
+
+    html, body {
+        width: 210mm;
+        min-height: 297mm;
+        background: #ffffff !important;
+    }
+
+    body > *:not(#cv-template) {
+        display: none !important;
+    }
+
+    #cv-template {
+        position: relative !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 210mm !important;
+        min-height: 297mm;
+        display: flex !important;
+        visibility: visible !important;
+    }
+
+    .cv-sidebar,
+    .cv-header,
+    .cv-header::after,
+    .cv-qr-block {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}
+>>>>>>> aa44368 (Ajustement du CV et de la mise en page)

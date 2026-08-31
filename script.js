@@ -289,12 +289,35 @@ console.log("Java • IoT • ESP32 • JavaFX • RFID");
 // TÉLÉCHARGEMENT CV EN PDF
 // ===============================
 
+<<<<<<< HEAD
+=======
+const portfolioUrl = "https://amede-portfolio.vercel.app/";
+
+function createCvQrCode() {
+    const qrContainer = document.getElementById("cv-qr-code");
+
+    if (!qrContainer || qrContainer.childElementCount > 0) {
+        return;
+    }
+
+    const qrImage = document.createElement("img");
+    qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=140x140&margin=4&data=${encodeURIComponent(portfolioUrl)}`;
+    qrImage.alt = "QR code vers le portfolio";
+    qrImage.width = 70;
+    qrImage.height = 70;
+    qrContainer.appendChild(qrImage);
+}
+
+createCvQrCode();
+
+>>>>>>> aa44368 (Ajustement du CV et de la mise en page)
 const btnDownloadCV = document.querySelector('.btn-outline[download]');
 
 if (btnDownloadCV) {
     btnDownloadCV.addEventListener("click", (e) => {
     e.preventDefault();
 
+<<<<<<< HEAD
     const element = document.getElementById('cv-template');
     const originalText = btnDownloadCV.innerHTML;
     btnDownloadCV.innerHTML = "Génération...";
@@ -333,5 +356,12 @@ if (btnDownloadCV) {
         btnDownloadCV.innerHTML = originalText;
         window.scrollTo(savedScrollX, savedScrollY);
     });
+=======
+    createCvQrCode();
+    const originalText = btnDownloadCV.innerHTML;
+    btnDownloadCV.innerHTML = "Ouverture de l'impression...";
+    window.print();
+    setTimeout(() => { btnDownloadCV.innerHTML = originalText; }, 1000);
+>>>>>>> aa44368 (Ajustement du CV et de la mise en page)
 });
 }
