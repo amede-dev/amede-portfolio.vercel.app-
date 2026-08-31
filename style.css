@@ -1201,6 +1201,19 @@ footer {
     word-break: break-all;
 }
 
+.cv-link-item strong {
+    flex: 0 0 28px;
+    color: #1c2942;
+    font-size: .62rem;
+    line-height: 1.5;
+}
+
+.cv-contact-logo {
+    flex: 0 0 15px;
+    color: #1c2942;
+    margin-top: 1px;
+}
+
 .cv-main {
     flex: 1;
     display: flex;
