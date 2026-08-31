@@ -1206,6 +1206,7 @@ footer {
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
+    position: relative;
 }
 
 .cv-header {
@@ -1312,6 +1313,41 @@ footer {
     color: #666;
     font-style: normal;
     font-size: 0.76rem;
+}
+
+.cv-qr-block {
+    position: absolute;
+    right: 28px;
+    bottom: 22px;
+    z-index: 4;
+    width: 82px;
+    padding: 5px;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    text-align: center;
+    box-shadow: 0 2px 7px rgba(15, 23, 42, .12);
+}
+
+#cv-qr-code {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 3px;
+}
+
+#cv-qr-code img,
+#cv-qr-code canvas {
+    display: block;
+    width: 70px !important;
+    height: 70px !important;
+}
+
+.cv-qr-block span {
+    display: block;
+    color: #1c2942;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .4px;
+    text-transform: uppercase;
 }
 
 @media print {

@@ -299,3 +299,16 @@ if (btnDownloadCV) {
         window.print();
     });
 }
+
+// QR code du portfolio affiché dans le CV imprimable.
+const qrContainer = document.getElementById("cv-qr-code");
+if (qrContainer && window.QRCode) {
+    new QRCode(qrContainer, {
+        text: "https://amede-portfolio.vercel.app/",
+        width: 70,
+        height: 70,
+        colorDark: "#1c2942",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.H
+    });
+}
