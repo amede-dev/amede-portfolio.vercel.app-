@@ -1268,7 +1268,7 @@ footer {
     z-index: 1;
     width: 140px;
     height: 140px;
-    object-fit: cover;
+    object-fit: contain;
     display: block;
     margin: 0 auto 24px;
     border-radius: 2px;
