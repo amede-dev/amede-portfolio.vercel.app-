@@ -300,9 +300,12 @@
                 </div>
                 <div class="timeline-card">
                     <span class="timeline-date">Juillet 2025</span>
-                    <h3>Stage 3 mois au sein du centre de formation « Spray_info ».</h3>
+                    <h3>Stage au sein du centre de formation « Spray_info ».</h3>
                     <p class="timeline-place">Fianarantsoa, Madagascar</p>
-                    <p class="timeline-desc">"Conception et réalisation d'un Système de suivi et de supervision des lampadaires urbains : développement du firmware embarqué (ESP32 en C++), mise en place du serveur backend (Node.js, API REST, WebSockets temps réel) et création d'une application mobile Android (Java, Google Maps API) connectée à une base de données PostgreSQL."</p>
+                    <p class="timeline-desc">Conception et réalisation d'un système de suivi et de supervision des lampadaires urbains : développement du firmware embarqué, du backend Node.js avec API REST, d'une application mobile Android en Java intégrant Google Maps API et d'une base de données PostgreSQL.</p>
+                    <div class="timeline-tags" aria-label="Technologies utilisées">
+                        <span>Firmware embarqué</span><span>Node.js</span><span>API REST</span><span>Android Java</span><span>Google Maps API</span><span>PostgreSQL</span>
+                    </div>
                 </div>
             </div>
 
@@ -375,7 +378,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
                         Faculté des Sciences Fianarantsoa
                     </span>
-                    <a href="https://gestion-ecole-five.vercel.app/" class="btn-demo" target="_blank" rel="noopener noreferrer" title="Voir la démo">
+                    <a href="#android-demo" class="btn-demo" data-android-demo title="Ouvrir la démonstration Android" aria-haspopup="dialog">
                         <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
                         Démo
                     </a>
@@ -492,6 +495,44 @@
 
         </div>
     </section>
+
+    <!-- DÉMONSTRATION ANDROID -->
+    <div class="android-modal" id="android-demo" role="dialog" aria-modal="true" aria-labelledby="android-demo-title" hidden>
+        <div class="android-modal-backdrop" data-close-demo></div>
+        <div class="android-dialog">
+            <div class="android-dialog-header">
+                <div>
+                    <span class="android-kicker">Démonstration mobile</span>
+                    <h2 id="android-demo-title">Gestion École &amp; Paie</h2>
+                </div>
+                <button class="android-close" type="button" data-close-demo aria-label="Fermer la démonstration">&times;</button>
+            </div>
+            <div class="android-phone" aria-label="Aperçu de l'application Android">
+                <div class="android-statusbar"><span>09:41</span><span>▮▮▮  Wi-Fi  ▰</span></div>
+                <div class="android-appbar"><span class="android-app-logo">R</span><strong>Gestion Pro</strong><span class="android-notification">⌁</span></div>
+                <div class="android-screen">
+                    <p class="android-welcome">Bonjour, Amedé 👋</p>
+                    <p class="android-caption">Tableau de bord</p>
+                    <div class="android-tabs" role="tablist">
+                        <button class="android-tab active" type="button" data-android-tab="ecole" role="tab" aria-selected="true">École</button>
+                        <button class="android-tab" type="button" data-android-tab="paie" role="tab" aria-selected="false">Paie</button>
+                    </div>
+                    <div class="android-panel active" data-android-panel="ecole" role="tabpanel">
+                        <div class="android-stat-grid"><div><strong>248</strong><span>Élèves</span></div><div><strong>18</strong><span>Classes</span></div></div>
+                        <div class="android-list-card"><span class="android-list-icon">✓</span><span><strong>Présences du jour</strong><small>231 présents · 17 absents</small></span><b>93%</b></div>
+                        <div class="android-list-card"><span class="android-list-icon purple">▣</span><span><strong>Prochaine classe</strong><small>Master 2 IA · 14:00</small></span><b>→</b></div>
+                    </div>
+                    <div class="android-panel" data-android-panel="paie" role="tabpanel" hidden>
+                        <div class="android-stat-grid"><div><strong>12</strong><span>Employés</span></div><div><strong>4,8M</strong><span>Masse salariale</span></div></div>
+                        <div class="android-list-card"><span class="android-list-icon">✓</span><span><strong>Paie de juillet</strong><small>Calculée et prête à exporter</small></span><b>100%</b></div>
+                        <div class="android-list-card"><span class="android-list-icon purple">↓</span><span><strong>Bulletins de salaire</strong><small>12 documents disponibles</small></span><b>→</b></div>
+                    </div>
+                    <div class="android-bottom-nav"><span class="selected">⌂<small>Accueil</small></span><span>▤<small>Activité</small></span><span>⚙<small>Paramètres</small></span></div>
+                </div>
+            </div>
+            <div class="android-dialog-footer"><span>Application Android native · Java · Android Studio</span><button type="button" class="btn-primary" data-close-demo>Fermer</button></div>
+        </div>
+    </div>
 
     <!-- LANGUES -->
     <section id="langues" class="reveal">
