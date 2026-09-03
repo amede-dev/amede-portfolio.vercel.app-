@@ -135,6 +135,51 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
 });
 
 // ===============================
+// DÉMONSTRATION ANDROID
+// ===============================
+
+const androidModal = document.getElementById("android-demo");
+const androidDemoButtons = document.querySelectorAll("[data-android-demo]");
+const closeAndroidDemo = () => {
+    if (!androidModal) return;
+    androidModal.hidden = true;
+    document.body.classList.remove("demo-open");
+};
+
+androidDemoButtons.forEach(button => {
+    button.addEventListener("click", event => {
+        event.preventDefault();
+        if (!androidModal) return;
+        androidModal.hidden = false;
+        document.body.classList.add("demo-open");
+        androidModal.querySelector(".android-close")?.focus();
+    });
+});
+
+androidModal?.querySelectorAll("[data-close-demo]").forEach(button => {
+    button.addEventListener("click", closeAndroidDemo);
+});
+
+androidModal?.addEventListener("click", event => {
+    const tab = event.target.closest("[data-android-tab]");
+    if (!tab) return;
+    const selected = tab.dataset.androidTab;
+    androidModal.querySelectorAll("[data-android-tab]").forEach(item => {
+        const active = item === tab;
+        item.classList.toggle("active", active);
+        item.setAttribute("aria-selected", active ? "true" : "false");
+    });
+    androidModal.querySelectorAll("[data-android-panel]").forEach(panel => {
+        panel.hidden = panel.dataset.androidPanel !== selected;
+        panel.classList.toggle("active", !panel.hidden);
+    });
+});
+
+document.addEventListener("keydown", event => {
+    if (event.key === "Escape" && androidModal && !androidModal.hidden) closeAndroidDemo();
+});
+
+// ===============================
 // ACTIVE MENU
 // ===============================
 
