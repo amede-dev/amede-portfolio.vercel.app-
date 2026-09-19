@@ -1239,6 +1239,15 @@ body.light-theme .tool-item {
     object-fit: contain !important;
 }
 
+.project-cover-portfolio {
+    background: #0b1220 !important;
+}
+
+.project-cover-portfolio img {
+    object-fit: contain !important;
+    object-position: center top !important;
+}
+
 .project-card-featured:hover .project-cover img {
     transform: scale(1.04);
 }
