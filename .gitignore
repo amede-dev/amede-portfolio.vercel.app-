@@ -1,0 +1,16 @@
+# Fichiers générés et dépendances
+node_modules/
+dist/
+build/
+
+# Variables et fichiers locaux
+.env
+.env.local
+*.log
+.DS_Store
+
+# Fichiers temporaires des éditeurs
+.vscode/
+.idea/
+*.swp
+*.swo
