@@ -23,8 +23,9 @@
 
         <div data-component="navigation.html"></div>
 
-+<!-- À PROPOS -->
-    <section id="apropos">
+<main id="views">
+    <div class="view active" id="view-accueil" data-route="/">
+    <section id="accueil">
 
         <div class="hero-bg"></div>
 
@@ -32,14 +33,14 @@
 
             <div class="hero-left">
 
-                <p class="hero-greeting">Bonjour, je suis</p>
+                <p class="hero-greeting" data-i18n="greeting">Bonjour, je suis</p>
 
                 <h1 class="hero-name">
                     RAKOTONANDRASANA
                     <span>Amedé</span>
                 </h1>
 
-                <p class="hero-desc">
+                <p class="hero-desc" data-i18n="heroDescription">
                     Étudiant en Master professionnel en Intelligences Artificielles à l'ENI de l'Université de Fianarantsoa,Licence Professionnelle EA2I.
                     Passionné par la science appliquée à l'informatique, et Déterminé à mettre en pratique mes compétences pour contribuer à des projets innovants.
                 </p>
@@ -75,10 +76,10 @@
                 </div>
 
                 <div class="hero-buttons">
-                    <a href="#contact" class="btn-primary">Me contacter</a>
-                    <a href="#" class="btn-outline" download>
+                    <a href="#/contact" class="btn-primary" data-i18n="contactMe">Me contacter</a>
+                    <a href="#" class="btn-outline" download data-cv-download>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                        Télécharger CV
+                        <span data-i18n="downloadCv">Télécharger CV</span>
                     </a>
                 </div>
 
@@ -92,23 +93,22 @@
 
         </div>
 
-        <div class="hero-arrow">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-        </div>
-
     </section>
 
-+<!-- COMPETENCES -->
+    </div>
+    <div class="view" id="view-competences" data-route="/competences">
     <section id="competences" class="reveal">
 
         <div class="section-header">
-            <h2>Compétences</h2>
-            <p class="section-subtitle">Expertise technique et savoir-faire développés au fil des projets</p>
+            <p class="section-eyebrow">Compétences</p>
+            <h2 data-i18n="skills">Compétences <span style="color:var(--accent)">techniques</span></h2>
+            <p class="section-subtitle" data-i18n="skillsSubtitle">Expertise technique et savoir-faire développés au fil des projets</p>
         </div>
 
         <div class="skills-category-grid skills-row-3">
 
             <div class="skill-category-card">
+                <span class="skill-number" aria-hidden="true">01</span>
                 <div class="skill-cat-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
                 </div>
@@ -122,6 +122,7 @@
             </div>
 
             <div class="skill-category-card">
+                <span class="skill-number" aria-hidden="true">02</span>
                 <div class="skill-cat-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4 4 0 0 1 4 4v1h1a3 3 0 0 1 0 6h-1v1a4 4 0 0 1-8 0v-1H7a3 3 0 0 1 0-6h1V6a4 4 0 0 1 4-4z"/><circle cx="9" cy="9" r="1"/><circle cx="15" cy="9" r="1"/></svg>
                 </div>
@@ -134,6 +135,7 @@
             </div>
 
             <div class="skill-category-card">
+                <span class="skill-number" aria-hidden="true">03</span>
                 <div class="skill-cat-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
                 </div>
@@ -148,6 +150,7 @@
         </div>
 
         <div class="languages-panel" tabindex="0" aria-label="Langages de programmation">
+            <span class="panel-number" aria-hidden="true">04</span>
             <h3>Langages de programmation</h3>
             <div class="tools-list">
                 <span class="tool-item"><i class="devicon-python-plain colored language-devicon" aria-hidden="true"></i>Python</span>
@@ -163,6 +166,7 @@
         </div>
 
         <div class="tools-panel" tabindex="0" aria-label="Outils ou plateformes">
+            <span class="panel-number" aria-hidden="true">05</span>
             <h3>Outils ou plateformes</h3>
             <div class="tools-list">
                 <span class="tool-item"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9zM12 3v9m8-4.5-8 4.5m-8-4.5 8 4.5"/></svg>VirtualBox</span>
@@ -179,22 +183,27 @@
                 <span class="tool-item"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 20 7v10l-8 4-8-4V7zM8 9h8M8 13h5"/></svg>Vercel</span>
                 <span class="tool-item"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5h12v4H6zM6 15h12v4H6zM9 9v6M15 9v6"/></svg>Nexus</span>
                 <span class="tool-item"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19V9h14v10M8 9V5h8v4M8 13h8M8 16h5"/></svg>Streamlit</span>
+                <span class="tool-item"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4zM8 10h8M8 14h5"/></svg>API Partner</span>
+                <span class="tool-item"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18v12H3zM3 7l9 6 9-6"/></svg>SMTP</span>
             </div>
         </div>
 
     </section>
 
     <!-- EXPÉRIENCES -->
+    </div>
+    <div class="view" id="view-parcours" data-route="/parcours">
     <section id="experiences" class="reveal">
         <div class="section-header">
-            <h2>Expériences <span style="color:var(--accent)">Professionnelles</span></h2>
-            <p class="section-subtitle">Mon parcours et mes contributions dans le domaine de la technologie</p>
+            <p class="section-eyebrow">Expérience</p>
+            <h2><span data-i18n="experience">Expériences</span> <span style="color:var(--accent)" data-i18n="professional">Professionnelles</span></h2>
+            <p class="section-subtitle" data-i18n="experienceSubtitle">Mon parcours et mes contributions dans le domaine de la technologie</p>
         </div>
 
         <div class="timeline">
             <div class="timeline-item">
                 <div class="timeline-dot">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                    <span class="timeline-dot-core" aria-hidden="true"></span>
                 </div>
                 <div class="timeline-card">
                     <span class="timeline-date">Juin - 2027</span>
@@ -204,7 +213,7 @@
 
             <div class="timeline-item timeline-item--right">
                 <div class="timeline-dot">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+                    <span class="timeline-dot-core" aria-hidden="true"></span>
                 </div>
                 <div class="timeline-card">
                     <span class="timeline-date">Juillet 2025</span>
@@ -219,49 +228,70 @@
     <!-- FORMATION -->
     <section id="formation" class="reveal">
         <div class="section-header">
-            <h2>Formation <span style="color:var(--accent)">académique</span></h2>
-            <p class="section-subtitle">Mon parcours éducatif et mes diplômes</p>
+            <p class="section-eyebrow">Parcours</p>
+            <h2><span data-i18n="education">Formation</span> <span style="color:var(--accent)" data-i18n="academic">académique</span></h2>
+            <p class="section-subtitle" data-i18n="educationSubtitle">Mon parcours éducatif et mes diplômes</p>
         </div>
 
-        <div class="formation-grid">
-            <div class="formation-card">
-                <div class="formation-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+        <div class="timeline formation-timeline">
+            <div class="timeline-item">
+                <div class="timeline-dot"><span class="timeline-dot-core" aria-hidden="true"></span></div>
+                <div class="timeline-card">
+                    <span class="timeline-number" aria-hidden="true">01</span>
+                    <span class="timeline-date">2022</span>
+                    <h3>Baccalauréat - Série S</h3>
+                    <p class="timeline-place">Lycée Alakamisy Ambohimaha</p>
                 </div>
-                <h3>Master 2 Intelligence Artificielle - Objets connectés et cybersécurité</h3>
-                <span class="formation-date">2026 - 2027</span>
-                <p class="formation-place">École Nationale d'Informatique, Fianarantsoa</p>
             </div>
 
-            <div class="formation-card">
-                <div class="formation-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            <div class="timeline-item timeline-item--right">
+                <div class="timeline-dot"><span class="timeline-dot-core" aria-hidden="true"></span></div>
+                <div class="timeline-card">
+                    <span class="timeline-number" aria-hidden="true">02</span>
+                    <span class="timeline-date">2024 - 2025</span>
+                    <h3>Licence Professionnelle - Électronique Appliquée et Informatique Industrielle</h3>
+                    <p class="timeline-place">Faculté des Sciences, Fianarantsoa</p>
                 </div>
-                <h3>Licence Professionnelle - En Électronique Appliquée et Informatique Industrielle</h3>
-                <span class="formation-date">2024 - 2025</span>
-                <p class="formation-place">Faculté des Sciences, Fianarantsoa</p>
             </div>
 
-            <div class="formation-card">
-                <div class="formation-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+            <div class="timeline-item">
+                <div class="timeline-dot"><span class="timeline-dot-core" aria-hidden="true"></span></div>
+                <div class="timeline-card">
+                    <span class="timeline-number" aria-hidden="true">03</span>
+                    <span class="timeline-date">2026 - 2027</span>
+                    <h3>Master 2 Intelligence Artificielle - Objets connectés et cybersécurité</h3>
+                    <p class="timeline-place">École Nationale d'Informatique, Fianarantsoa</p>
                 </div>
-                <h3>Baccalauréat - Série S</h3>
-                <span class="formation-date">2022</span>
-                <p class="formation-place">Lycée Alakamisy Ambohimaha</p>
             </div>
         </div>
     </section>
 
     <!-- PROJETS ACADÉMIQUES -->
+    </div>
+    <div class="view" id="view-projets" data-route="/projets">
     <section id="projets" class="reveal">
         <div class="section-header">
-            <h2>Projets <span style="color:var(--accent)">académiques</span></h2>
-            <p class="section-subtitle">Réalisations techniques et innovations développées durant mon parcours</p>
+            <p class="section-eyebrow">Projets</p>
+            <h2><span data-i18n="projects">Projets</span> <span style="color:var(--accent)" data-i18n="academic">académiques</span></h2>
+            <p class="section-subtitle" data-i18n="projectsSubtitle">Réalisations techniques et innovations développées durant mon parcours</p>
         </div>
 
         <div class="projects-grid">
             <h3 class="project-group-title">Au sein de l’ENI Fianarantsoa</h3>
+
+            <div class="project-card project-card-featured">
+                <div class="project-cover project-cover-linguistique"><img src="assets/images/Linguistique_Regionnale.png" alt="Aperçu de l’application mobile Linguistique Régionale" loading="lazy"></div>
+                <div class="project-title-row project-main-title-row">
+                    <div class="project-icon" title="Application mobile"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M9 5h6M11 18h2"/></svg></div>
+                    <h3 class="project-title-compact">Linguistique Régionale</h3>
+                    <a class="project-github" href="https://github.com/amede-dev/Linguistique_Regionnale_frontend" target="_blank" rel="noopener noreferrer" aria-label="Code source frontend de Linguistique Régionale"><i class="devicon-github-original project-github-icon"></i></a>
+                </div>
+                <p class="project-desc">Application mobile dédiée à la découverte, la recherche et la contribution autour des mots et expressions des régions et dialectes de Madagascar.</p>
+                <div class="project-techs"><span>Flutter</span><span>Dart</span><span>Spring Boot</span><span>Java</span><span>Supabase</span></div>
+                <div class="project-footer">
+                    <a href="assets/apps/Linguistique_Regionnale.apk" class="btn-demo" download>↓ Télécharger APK</a>
+                </div>
+            </div>
 
             <div class="project-card project-card-featured">
                 <div class="project-cover project-cover-segmentation"><img src="assets/images/Segmentation-Client-Marketing-IA.png" alt="Aperçu du tableau de bord Segmentation Client Marketing IA" loading="lazy"></div>
@@ -373,13 +403,23 @@
                 <p class="project-desc">Contrôle et affichage de texte sur une matrice LED depuis une application Android.</p><div class="project-techs"><span>Java</span><span>Android</span><span>LED Matrix</span></div>
             </div>
         </div>
+
+        <div class="all-repositories-link-wrap">
+            <a class="all-repositories-link" href="https://github.com/amede-dev" target="_blank" rel="noopener noreferrer">
+                <i class="devicon-github-original" aria-hidden="true"></i>
+                <span>Tous mes dépôts</span>
+            </a>
+        </div>
     </section>
 
     <!-- LANGUES -->
+    </div>
+    <div class="view" id="view-a-propos" data-route="/a-propos">
     <section id="langues" class="reveal">
         <div class="section-header">
-            <h2>Langues <span style="color:var(--accent)">maîtrisées</span></h2>
-            <p class="section-subtitle">Compétences linguistiques développées au quotidien</p>
+            <p class="section-eyebrow">Langues</p>
+            <h2><span data-i18n="languages">Langues</span> <span style="color:var(--accent)" data-i18n="mastered">maîtrisées</span></h2>
+            <p class="section-subtitle" data-i18n="languagesSubtitle">Compétences linguistiques développées au quotidien</p>
         </div>
         <div class="langues-box">
             <div class="langue-item"><div class="langue-header"><span class="langue-nom">Malagasy</span><span class="langue-niveau">Langue Maternelle</span></div><div class="langue-bar-bg"><div class="langue-bar-fill" style="--progress:100%"></div></div></div>
@@ -390,7 +430,7 @@
 
     <!-- CENTRES D'INTÉRÊT -->
     <section id="interets" class="reveal">
-        <div class="section-header"><h2>Centres d'<span style="color:var(--accent)">Intérêt</span></h2><p class="section-subtitle">Ce qui me passionne en dehors du travail</p></div>
+        <div class="section-header"><p class="section-eyebrow">Centres d'intérêt</p><h2><span data-i18n="interestsPrefix">Centres d'</span><span style="color:var(--accent)" data-i18n="interest">Intérêt</span></h2><p class="section-subtitle" data-i18n="interestsSubtitle">Ce qui me passionne en dehors du travail</p></div>
         <div class="interests-grid">
             <div class="interest-card"><div class="interest-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polygon points="12,7 15,9.2 13.8,12.8 10.2,12.8 9,9.2"/><path d="m12 7-1.8-3M15 9.2l3.8-.2M13.8 12.8l2.2 3.2M10.2 12.8 8 16M9 9.2 5.2 9"/></svg></div><h3>Football</h3><p>Le sport, l'esprit d'équipe et le dépassement de soi.</p></div>
             <div class="interest-card"><div class="interest-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7h3l1.5-2h7L17 7h3v12H4V7Z"/><circle cx="12" cy="13" r="3.5"/></svg></div><h3>Voyage &amp; photographie</h3><p>Découvrir de nouveaux horizons et capturer des moments uniques.</p></div>
@@ -399,8 +439,10 @@
     </section>
 
     <!-- CONTACT -->
+    </div>
+    <div class="view" id="view-contact" data-route="/contact">
     <section id="contact" class="reveal">
-        <div class="section-header"><h2>Me <span style="color:var(--accent)">Contacter</span></h2><p class="contact-subtitle">N'hésitez pas à me contacter pour toute opportunité ou collaboration</p></div>
+        <div class="section-header"><p class="section-eyebrow">Contact</p><h2><span data-i18n="contactMeTitle">Me</span> <span style="color:var(--accent)" data-i18n="contactVerb">Contacter</span></h2><p class="contact-subtitle" data-i18n="contactSubtitle">N'hésitez pas à me contacter pour toute opportunité ou collaboration</p></div>
         <div class="contact-layout">
             <div class="contact-info"><h3>Informations de contact</h3>
                 <div class="contact-info-item"><span class="contact-svg-icon"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span><div><p class="info-label">Email</p><p class="info-value">rakotonandrasanaamede5@gmail.com</p></div></div>
@@ -410,6 +452,8 @@
             <div class="contact-form-box"><div class="form-group"><input type="text" id="formNom" class="form-input" placeholder="Nom"></div><div class="form-group"><input type="email" id="formEmail" class="form-input" placeholder="Email"></div><div class="form-group"><input type="tel" id="formTelephone" class="form-input" placeholder="Téléphone"></div><div class="form-group"><textarea id="formMessage" class="form-input form-textarea" placeholder="Message"></textarea></div><button class="btn-send">Envoyer</button></div>
         </div>
     </section>
+    </div>
+</main>
 
     <div id="alertDialog" class="alert-dialog" hidden role="alertdialog" aria-modal="true" aria-labelledby="alertDialogTitle" aria-describedby="alertDialogMessage">
         <div class="alert-dialog-card">
@@ -421,6 +465,9 @@
     </div>
 
     <div data-component="footer.html"></div>
+    <button type="button" id="backToTop" class="back-to-top" aria-label="Retour en haut">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5m0 0-6 6m6-6 6 6"/></svg>
+    </button>
 
     <!-- GABARIT CV (caché, utilisé pour l'export PDF) -->
     <div id="cv-template">

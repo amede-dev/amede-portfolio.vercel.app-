@@ -1,26 +1,88 @@
-<!-- Navigation -->
-    <header>
-        <nav>
-            <div class="logo">R.A</div>
-            <div class="nav-links" id="navLinks">
-                <a href="#apropos">À propos</a>
-                <a href="#competences">Compétences</a>
-                <a href="#experiences">Expériences</a>
-                <a href="#formation">Formation</a>
-                <a href="#projets">Projets</a>
-                <a href="#langues">Langues</a>
-                <a href="#contact">Contact</a>
+<!-- Barre de navigation (mise en page calquée sur Portfolio-main) -->
+    <header class="site-header" id="siteHeader">
+        <div class="header-inner">
+            <div class="header-bar">
+
+                <!-- Logo rond -->
+                <button type="button" class="brand-logo" aria-label="Logo R.A">R.A</button>
+
+                <!-- Groupe de liens (desktop) : un seul fond continu + pilule active qui glisse -->
+                <nav class="nav-pills" id="navPills" aria-label="Navigation principale">
+                    <span class="nav-indicator" id="navIndicator" aria-hidden="true"></span>
+                    <a href="#/" class="nav-pill" data-route="/">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 11 9-8 9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg>
+                        <span>Accueil</span>
+                    </a>
+                    <a href="#/competences" class="nav-pill" data-route="/competences">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></svg>
+                        <span>Compétences</span>
+                    </a>
+                    <a href="#/parcours" class="nav-pill" data-route="/parcours">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></svg>
+                        <span>Expérience</span>
+                    </a>
+                    <a href="#/projets" class="nav-pill" data-route="/projets">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+                        <span>Projets</span>
+                    </a>
+                    <a href="#/a-propos" class="nav-pill" data-route="/a-propos">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>
+                        <span>Langues</span>
+                    </a>
+                    <a href="#/contact" class="nav-pill" data-route="/contact">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                        <span>Contact</span>
+                    </a>
+                </nav>
+
+                <div class="header-right">
+
+                    <!-- Mobile : thème + burger -->
+                    <button class="round-pill theme-toggle theme-toggle-mobile" type="button" aria-label="Activer le mode clair" title="Activer le mode clair">
+                        <span class="theme-icon theme-icon-sun" aria-hidden="true">☼</span>
+                        <span class="theme-icon theme-icon-moon" aria-hidden="true">◐</span>
+                    </button>
+                    <button class="round-pill burger-mobile" id="menuToggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mobilePanel">
+                        <svg class="icon-bars" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+                        <svg class="icon-close" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+                    </button>
+
+                    <!-- Options complémentaires -->
+                    <div class="burger-desktop-wrap">
+                        <div class="burger-extras" id="burgerExtras" aria-hidden="true">
+                            <a href="#/a-propos" class="ghost-pill" data-route="/a-propos" tabindex="-1">Langues</a>
+                            <a href="#" class="ghost-pill" data-cv-download tabindex="-1">
+                                CV
+                                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12m0 0-5-5m5 5 5-5M5 20h14"/></svg>
+                            </a>
+                            <button class="ghost-pill theme-toggle theme-toggle-desktop" type="button" aria-label="Activer le mode clair" title="Activer le mode clair" tabindex="-1">
+                                <span class="theme-icon theme-icon-sun" aria-hidden="true">☼</span>
+                                <span class="theme-icon theme-icon-moon" aria-hidden="true">◐</span>
+                            </button>
+                        </div>
+                        <button class="ghost-pill burger-desktop" id="menuToggleDesktop" type="button" aria-label="Menu" aria-expanded="false" aria-controls="burgerExtras">
+                            <svg class="icon-bars" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+                            <svg class="icon-close" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+                        </button>
+                    </div>
+
+                </div>
             </div>
-            <div class="nav-actions">
-                <button class="theme-toggle" id="themeToggle" type="button" aria-label="Activer le mode clair" title="Activer le mode clair">
-                    <span class="theme-icon theme-icon-sun" aria-hidden="true">☼</span>
-                    <span class="theme-icon theme-icon-moon" aria-hidden="true">◐</span>
-                </button>
-                <button class="menu-toggle" id="menuToggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
+        </div>
+
+        <!-- Panneau mobile -->
+        <nav class="mobile-panel" id="mobilePanel" aria-label="Navigation mobile">
+            <div class="mobile-panel-inner">
+                <a href="#/" class="mobile-link" data-route="/"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 11 9-8 9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg>Accueil</a>
+                <a href="#/competences" class="mobile-link" data-route="/competences"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></svg>Compétences</a>
+                <a href="#/parcours" class="mobile-link" data-route="/parcours"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></svg>Expérience</a>
+                <a href="#/projets" class="mobile-link" data-route="/projets"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Projets</a>
+                <a href="#/a-propos" class="mobile-link" data-route="/a-propos"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>Langues</a>
+                <a href="#/contact" class="mobile-link" data-route="/contact"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>Contact</a>
+                <a href="#" class="mobile-cv" data-cv-download>
+                    Télécharger le CV
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12m0 0-5-5m5 5 5-5M5 20h14"/></svg>
+                </a>
             </div>
         </nav>
     </header>

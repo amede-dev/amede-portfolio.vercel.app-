@@ -8,7 +8,7 @@ const glow = document.getElementById("cursorGlow");
 // THÈME SOMBRE / CLAIR
 // ===============================
 
-const themeToggle = document.getElementById("themeToggle");
+const themeToggles = document.querySelectorAll(".theme-toggle");
 const savedTheme = localStorage.getItem("portfolio-theme");
 
 if (savedTheme === "light") {
@@ -16,17 +16,18 @@ if (savedTheme === "light") {
 }
 
 function updateThemeButton() {
-    if (!themeToggle) return;
     const lightMode = document.body.classList.contains("light-theme");
-    themeToggle.setAttribute("aria-label", lightMode ? "Activer le mode sombre" : "Activer le mode clair");
-    themeToggle.title = lightMode ? "Activer le mode sombre" : "Activer le mode clair";
+    themeToggles.forEach(btn => {
+        btn.setAttribute("aria-label", lightMode ? "Activer le mode sombre" : "Activer le mode clair");
+        btn.title = lightMode ? "Activer le mode sombre" : "Activer le mode clair";
+    });
 }
 
-themeToggle?.addEventListener("click", () => {
+themeToggles.forEach(btn => btn.addEventListener("click", () => {
     const lightMode = document.body.classList.toggle("light-theme");
     localStorage.setItem("portfolio-theme", lightMode ? "light" : "dark");
     updateThemeButton();
-});
+}));
 
 updateThemeButton();
 
@@ -39,11 +40,16 @@ document.addEventListener("mousemove", (e) => {
 // PROGRESS BAR
 // ===============================
 
-window.addEventListener("scroll", () => {
-    const maxHeight = document.body.scrollHeight - window.innerHeight;
-    const percent = (window.scrollY / maxHeight) * 100;
-    document.getElementById("progressBar").style.width = percent + "%";
-});
+const progressBar = document.getElementById("progressBar");
+
+function updateProgress() {
+    const maxHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const percent = maxHeight > 0 ? Math.min(100, (window.scrollY / maxHeight) * 100) : 0;
+    progressBar.style.width = percent + "%";
+}
+
+window.addEventListener("scroll", updateProgress, { passive: true });
+window.addEventListener("resize", updateProgress);
 
 // ===============================
 // NETWORK CANVAS (fond réseau)
@@ -136,79 +142,291 @@ for (let i = 0; i < 20; i++) {
 // REVEAL ANIMATION
 // ===============================
 
-const revealElements = document.querySelectorAll(".reveal");
-
 const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.classList.add("visible");
         }
     });
-}, { threshold: 0.15 });
+}, { threshold: 0.05 });
 
-revealElements.forEach(element => revealObserver.observe(element));
-
-// ===============================
-// SMOOTH NAVIGATION
-// ===============================
-
-document.querySelectorAll('a[href^="#"]').forEach(link => {
-    link.addEventListener("click", (event) => {
-        event.preventDefault();
-        const section = document.querySelector(link.getAttribute("href"));
-        if (section) section.scrollIntoView({ behavior: "smooth" });
-    });
-});
-
-// ===============================
-// ACTIVE MENU
-// ===============================
-
-const sections = document.querySelectorAll("section[id]");
-const navLinks = document.querySelectorAll(".nav-links a");
-
-window.addEventListener("scroll", () => {
-    let current = "";
-    sections.forEach(section => {
-        if (window.scrollY >= section.offsetTop - 200) current = section.id;
-    });
-    navLinks.forEach(link => {
-        link.style.color = link.getAttribute("href") === "#" + current ? "var(--accent)" : "";
-    });
-});
-
-// ===============================
-// MENU MOBILE
-// ===============================
-
-const menuToggle = document.getElementById("menuToggle");
-const navLinksMenu = document.getElementById("navLinks");
-
-if (menuToggle && navLinksMenu) {
-
-    menuToggle.addEventListener("click", () => {
-        const isOpen = navLinksMenu.classList.toggle("active");
-        menuToggle.classList.toggle("active", isOpen);
-        menuToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
-    });
-
-    navLinksMenu.querySelectorAll("a").forEach(link => {
-        link.addEventListener("click", () => {
-            navLinksMenu.classList.remove("active");
-            menuToggle.classList.remove("active");
-            menuToggle.setAttribute("aria-expanded", "false");
-        });
-    });
-
-    document.addEventListener("click", (event) => {
-        const clickInsideMenu = navLinksMenu.contains(event.target) || menuToggle.contains(event.target);
-        if (!clickInsideMenu && navLinksMenu.classList.contains("active")) {
-            navLinksMenu.classList.remove("active");
-            menuToggle.classList.remove("active");
-            menuToggle.setAttribute("aria-expanded", "false");
-        }
+// Rejoue l'animation d'apparition à chaque affichage d'une vue.
+function resetReveals(view) {
+    view.querySelectorAll(".reveal").forEach(element => {
+        element.classList.remove("visible");
+        revealObserver.unobserve(element);
+        revealObserver.observe(element);
     });
 }
+
+// ===============================
+// NAVIGATION PAR VUES (une seule section affichée à la fois)
+// Routes identiques à Portfolio-main : #/  #/a-propos  #/competences  #/projets  #/parcours  #/contact
+// ===============================
+
+const ROUTES = ["/", "/a-propos", "/competences", "/projets", "/parcours", "/contact"];
+
+// Anciens liens à ancre (#competences, #formation…) redirigés vers la bonne vue.
+const LEGACY_HASHES = {
+    apropos: "/",
+    accueil: "/",
+    competences: "/competences",
+    experiences: "/parcours",
+    formation: "/parcours",
+    projets: "/projets",
+    langues: "/a-propos",
+    interets: "/a-propos",
+    contact: "/contact"
+};
+
+const views = [...document.querySelectorAll(".view")];
+const navPills = document.getElementById("navPills");
+const navIndicator = document.getElementById("navIndicator");
+const mobilePanel = document.getElementById("mobilePanel");
+const menuToggle = document.getElementById("menuToggle");
+const menuToggleDesktop = document.getElementById("menuToggleDesktop");
+const burgerExtras = document.getElementById("burgerExtras");
+const backToTop = document.getElementById("backToTop");
+
+// Numérotation automatique des expériences : 01, 02, 03…
+function updateTimelineNumbers() {
+    document.querySelectorAll("#experiences .timeline, #formation .formation-timeline").forEach(timeline => {
+        timeline.querySelectorAll(":scope > .timeline-item").forEach((item, index) => {
+            const card = item.querySelector(".timeline-card");
+            if (!card) return;
+
+            let number = card.querySelector(".timeline-number");
+            if (!number) {
+                number = document.createElement("span");
+                number.className = "timeline-number";
+                number.setAttribute("aria-hidden", "true");
+                card.prepend(number);
+            }
+
+            number.textContent = String(index + 1).padStart(2, "0");
+        });
+    });
+}
+
+updateTimelineNumbers();
+
+const timeline = document.querySelector("#experiences .timeline");
+if (timeline) {
+    new MutationObserver(updateTimelineNumbers).observe(timeline, { childList: true });
+}
+const formationTimeline = document.querySelector("#formation .formation-timeline");
+if (formationTimeline) {
+    new MutationObserver(updateTimelineNumbers).observe(formationTimeline, { childList: true });
+}
+
+// Numérotation automatique des catégories de compétences.
+function updateSkillNumbers() {
+    document.querySelectorAll("#competences .skill-category-card").forEach((card, index) => {
+        let number = card.querySelector(".skill-number");
+        if (!number) {
+            number = document.createElement("span");
+            number.className = "skill-number";
+            number.setAttribute("aria-hidden", "true");
+            card.prepend(number);
+        }
+        number.textContent = String(index + 1).padStart(2, "0");
+    });
+}
+
+updateSkillNumbers();
+
+// Bandeau défilant des outils : deux rangées qui avancent en sens opposés.
+function setupToolsMarquee() {
+    const list = document.querySelector(".tools-panel .tools-list");
+    if (!list || list.dataset.marqueeReady === "true") return;
+
+    const items = [...list.children];
+    const preferredOrder = [
+        "VirtualBox", "Git", "GitHub", "Docker", "Canva", "Gemini",
+        "Jenkins / CI/CD", "Kubernetes", "SonarQube", "Render", "Vercel",
+        "Nexus", "Streamlit", "Pipeline", "API Partner", "SMTP"
+    ];
+    const getName = item => item.textContent.trim();
+    const orderedItems = preferredOrder
+        .map(name => items.find(item => getName(item) === name))
+        .filter(Boolean);
+
+    list.dataset.marqueeReady = "true";
+    list.classList.add("tools-marquee");
+    list.replaceChildren();
+
+    // Les deux lignes utilisent la même liste complète, comme dans Portfolio-main.
+    const rows = [orderedItems, orderedItems];
+
+    rows.forEach((rowItems, rowIndex) => {
+        const row = document.createElement("div");
+        row.className = "tools-marquee-row";
+        const track = document.createElement("div");
+        track.className = "tools-marquee-track" + (rowIndex === 1 ? " tools-marquee-track-reverse" : "");
+
+        [rowItems, rowItems].forEach(copy => {
+            copy.forEach(item => track.appendChild(item.cloneNode(true)));
+        });
+
+        row.appendChild(track);
+        list.appendChild(row);
+    });
+
+}
+
+setupToolsMarquee();
+
+if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+
+let currentRoute = null;
+
+function resolveRoute() {
+    const raw = location.hash.replace(/^#/, "");
+    if (raw.startsWith("/")) {
+        const clean = raw.length > 1 ? raw.replace(/\/+$/, "") : "/";
+        return { route: ROUTES.includes(clean) ? clean : "/", anchor: null };
+    }
+    if (raw && LEGACY_HASHES[raw]) return { route: LEGACY_HASHES[raw], anchor: raw };
+    return { route: "/", anchor: null };
+}
+
+function moveIndicator(animate = true) {
+    if (!navIndicator || !navPills) return;
+    const active = navPills.querySelector(".nav-pill.active");
+    if (!active || !active.offsetWidth) {
+        navIndicator.style.opacity = "0";
+        return;
+    }
+    if (!animate) navIndicator.style.transition = "none";
+    navIndicator.style.left = active.offsetLeft + "px";
+    navIndicator.style.top = active.offsetTop + "px";
+    navIndicator.style.width = active.offsetWidth + "px";
+    navIndicator.style.height = active.offsetHeight + "px";
+    navIndicator.style.opacity = "1";
+    if (!animate) {
+        navIndicator.offsetWidth; // force le recalcul avant de réactiver la transition
+        navIndicator.style.transition = "";
+    }
+}
+
+function showRoute(initial = false) {
+    const { route, anchor } = resolveRoute();
+    const changed = route !== currentRoute;
+
+    // Normalise l'URL (ex. #contact -> #/contact) sans créer d'entrée d'historique.
+    const wanted = "#" + route;
+    if (location.hash !== wanted) {
+        history.replaceState(null, "", wanted);
+    }
+
+    if (changed) {
+        currentRoute = route;
+        views.forEach(view => view.classList.toggle("active", view.dataset.route === route));
+
+        document.querySelectorAll(".nav-pill, .mobile-link").forEach(link => {
+            const isActive = link.dataset.route === route;
+            link.classList.toggle("active", isActive);
+            if (isActive) link.setAttribute("aria-current", "page");
+            else link.removeAttribute("aria-current");
+        });
+
+        const activeView = views.find(view => view.dataset.route === route);
+        if (activeView) resetReveals(activeView);
+
+        moveIndicator(!initial);
+        setMobileMenu(false);
+        setDesktopExtras(false);
+        window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    }
+
+    if (anchor) {
+        const target = document.getElementById(anchor);
+        if (target) target.scrollIntoView({ behavior: initial ? "auto" : "smooth" });
+    }
+
+    updateProgress();
+    updateBackToTop();
+}
+
+// Un clic sur le lien de la page courante remonte simplement en haut (comme le modèle).
+document.addEventListener("click", (event) => {
+    const link = event.target.closest("a[data-route]");
+    if (link && link.dataset.route === currentRoute) {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+});
+
+window.addEventListener("hashchange", () => showRoute(false));
+
+// ===============================
+// MENUS (burger mobile + burger desktop CV / thème)
+// ===============================
+
+function setMobileMenu(open) {
+    if (!mobilePanel || !menuToggle) return;
+    mobilePanel.classList.toggle("open", open);
+    menuToggle.setAttribute("aria-expanded", open ? "true" : "false");
+    document.body.classList.toggle("menu-open", open);
+}
+
+function setDesktopExtras(open) {
+    if (!burgerExtras || !menuToggleDesktop) return;
+    burgerExtras.classList.toggle("open", open);
+    burgerExtras.setAttribute("aria-hidden", open ? "false" : "true");
+    menuToggleDesktop.setAttribute("aria-expanded", open ? "true" : "false");
+    burgerExtras.querySelectorAll("a, button").forEach(el => { el.tabIndex = open ? 0 : -1; });
+}
+
+menuToggle?.addEventListener("click", () => {
+    setMobileMenu(!mobilePanel.classList.contains("open"));
+});
+
+menuToggleDesktop?.addEventListener("click", () => {
+    setDesktopExtras(!burgerExtras.classList.contains("open"));
+});
+
+mobilePanel?.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", () => setMobileMenu(false));
+});
+
+burgerExtras?.querySelector("[data-cv-download]")?.addEventListener("click", () => setDesktopExtras(false));
+
+document.addEventListener("click", (event) => {
+    if (burgerExtras?.classList.contains("open") &&
+        !burgerExtras.contains(event.target) &&
+        !menuToggleDesktop.contains(event.target)) {
+        setDesktopExtras(false);
+    }
+});
+
+document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+        setMobileMenu(false);
+        setDesktopExtras(false);
+    }
+});
+
+// Au passage en affichage desktop, on referme le panneau mobile (et on libère le scroll).
+window.matchMedia("(min-width: 1280px)").addEventListener("change", (event) => {
+    if (event.matches) setMobileMenu(false);
+    moveIndicator(false);
+});
+
+window.addEventListener("resize", () => moveIndicator(false));
+window.addEventListener("load", () => moveIndicator(false));
+
+// ===============================
+// RETOUR EN HAUT
+// ===============================
+
+function updateBackToTop() {
+    backToTop?.classList.toggle("visible", window.scrollY > 600);
+}
+
+window.addEventListener("scroll", updateBackToTop, { passive: true });
+backToTop?.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+
+showRoute(true);
 
 // ===============================
 // FORMULAIRE CONTACT (EmailJS)
@@ -334,9 +552,9 @@ console.log("Java • IoT • ESP32 • JavaFX • RFID");
 // TÉLÉCHARGEMENT CV EN PDF
 // ===============================
 
-const btnDownloadCV = document.querySelector('.btn-outline[download]');
+const cvButtons = document.querySelectorAll("[data-cv-download]");
 
-if (btnDownloadCV) {
+cvButtons.forEach(btnDownloadCV => {
     btnDownloadCV.addEventListener("click", (e) => {
         e.preventDefault();
 
@@ -420,7 +638,7 @@ if (btnDownloadCV) {
         printWindow.addEventListener("load", () => setTimeout(printReadyWindow, 250), { once: true });
         setTimeout(printReadyWindow, 1200);
     });
-}
+});
 
 // QR code du portfolio affiché dans le CV imprimable.
 const qrContainer = document.getElementById("cv-qr-code");
