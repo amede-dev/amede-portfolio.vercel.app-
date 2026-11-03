@@ -3224,9 +3224,14 @@ body.menu-open { overflow: hidden; }
 }
 
 #accueil .hero-contact-info {
+    display: none;
     flex-direction: column;
     align-items: flex-start;
     gap: 9px;
+}
+
+#accueil .hero-socials {
+    display: none;
 }
 
 #accueil .hero-socials,

@@ -32,14 +32,23 @@ portfolio/
 │   ├── components-loader.js # Chargement des sections HTML
 │   └── script.js            # Animations et interactions
 ├── assets/
+│   ├── apps/               # Applications Android téléchargeables
+│   ├── documents/          # Documents de démonstration et présentation
 │   ├── icons/              # Favicon et icônes
 │   └── images/             # Photo et captures des projets
 ├── components/             # Sections HTML réutilisables
-│   ├── navigation.html
 │   ├── accueil.html
 │   ├── competences.html
+│   ├── contact.html
+│   ├── cv-template.html
+│   ├── experiences.html
+│   ├── footer.html
+│   ├── formation.html
+│   ├── interets.html
+│   ├── langues.html
+│   ├── navigation.html
 │   ├── projets.html
-│   └── contact.html
+│   └── README.md
 ├── data/                   # Données du portfolio
 │   └── portfolio-data.js
 ├── .gitignore
@@ -63,8 +72,8 @@ Puis ouvrir [http://localhost:8000](http://localhost:8000).
 Cloner le dépôt puis se placer dans le dossier du portfolio :
 
 ```bash
-git clone https://github.com/amede-dev/portfolio.git
-cd portfolio
+git clone https://github.com/amede-dev/amede-portfolio.vercel.app-.git
+cd amede-portfolio.vercel.app-
 ```
 
 Ce portfolio est un site statique : aucune commande `npm install` n'est nécessaire. Il peut être ouvert directement avec `index.html` ou lancé avec le serveur local indiqué ci-dessus.
@@ -89,6 +98,10 @@ Le projet peut être déployé directement sur GitHub Pages, Netlify ou Vercel c
 
 ## Projets présentés
 
+- [Linguistique Régionale](https://github.com/amede-dev/Linguistique_Regionnale_frontend)
+- [Segmentation Client Marketing IA](https://github.com/amede-dev/Segmentation-Client-Marketing-IA)
+- [Messagerie Bot ENI](https://github.com/amede-dev/messagerie-bot-backend)
+- [Portfolio Personnel](https://github.com/amede-dev/amede-portfolio.vercel.app-)
 - [Site Vitrine Spray_Info](https://github.com/amede-dev/Site_vitrineSprayInfo)
 - [Gestion d’École](https://github.com/amede-dev/Gestion_Ecole/tree/main/dist)
 
