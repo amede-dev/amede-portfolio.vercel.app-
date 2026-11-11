@@ -877,7 +877,8 @@ body.single-page-sections #apropos.active-section {
 }
 
 .languages-panel,
-.tools-panel {
+.tools-panel,
+.skill-domains-panel {
     position: relative;
     overflow: hidden;
 }
@@ -896,15 +897,18 @@ body.single-page-sections #apropos.active-section {
 }
 
 .languages-panel > :not(.panel-number),
-.tools-panel > :not(.panel-number) {
+.tools-panel > :not(.panel-number),
+.skill-domains-panel > :not(.panel-number) {
     position: relative;
     z-index: 1;
 }
 
 .languages-panel:hover,
 .tools-panel:hover,
+.skill-domains-panel:hover,
 .languages-panel:focus,
-.tools-panel:focus {
+.tools-panel:focus,
+.skill-domains-panel:focus {
     border-color: var(--accent);
     transform: translateY(-5px);
     box-shadow: 0 8px 30px rgba(59, 130, 246, .12);
@@ -912,8 +916,10 @@ body.single-page-sections #apropos.active-section {
 
 .reveal.visible .languages-panel:hover,
 .reveal.visible .tools-panel:hover,
+.reveal.visible .skill-domains-panel:hover,
 .reveal.visible .languages-panel:focus,
-.reveal.visible .tools-panel:focus {
+.reveal.visible .tools-panel:focus,
+.reveal.visible .skill-domains-panel:focus {
     transform: translateY(-5px);
 }
 
@@ -923,6 +929,22 @@ body.single-page-sections #apropos.active-section {
 
 .reveal.visible .tools-panel {
     animation: skillsPanelIn .75s .24s ease-out both;
+}
+
+.skill-domains-panel {
+    margin-top: 28px;
+    padding: 34px 38px;
+    border: 1px solid var(--border);
+    border-radius: 28px;
+    background: rgba(17, 24, 39, .72);
+    box-shadow: 0 14px 40px rgba(2, 6, 23, .18);
+    opacity: 0;
+    transform: translateY(24px);
+    transition: border-color .3s ease, transform .3s ease, box-shadow .3s ease;
+}
+
+.reveal.visible .skill-domains-panel {
+    animation: skillsPanelIn .75s .12s ease-out both;
 }
 
 @keyframes skillsPanelIn {
@@ -936,10 +958,268 @@ body.single-page-sections #apropos.active-section {
     font-size: 1.7rem;
 }
 
-.languages-panel h3 {
+.languages-panel h3,
+.skill-domains-panel h3 {
     margin-bottom: 28px;
     color: #ffffff;
     font-size: 1.7rem;
+}
+
+.skill-domains-list {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.skill-domain-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 48px;
+    padding: 10px 14px;
+    border: 1px solid rgba(96, 165, 250, .3);
+    border-radius: 12px;
+    background: rgba(15, 23, 42, .62);
+    color: #e2e8f0;
+    font-size: .94rem;
+    transition: border-color .25s ease, color .25s ease, transform .25s ease, background .25s ease;
+}
+
+.skill-domain-item i {
+    width: 18px;
+    color: var(--accent2);
+    text-align: center;
+}
+
+.skill-domain-item:hover {
+    border-color: var(--accent2);
+    background: rgba(37, 99, 235, .14);
+    color: #fff;
+    transform: translateY(-3px);
+}
+
+.categorized-tools-panel {
+    position: relative;
+    margin-top: 28px;
+    padding: 34px 38px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: 28px;
+    background: rgba(17, 24, 39, .72);
+    box-shadow: 0 14px 40px rgba(2, 6, 23, .18);
+    opacity: 0;
+    transform: translateY(24px);
+    transition: border-color .3s ease, transform .3s ease, box-shadow .3s ease;
+}
+
+.categorized-tools-panel > :not(.panel-number) {
+    position: relative;
+    z-index: 1;
+}
+
+.reveal.visible .categorized-tools-panel {
+    animation: skillsPanelIn .75s .24s ease-out both;
+}
+
+.categorized-tools-panel:hover,
+.categorized-tools-panel:focus {
+    border-color: var(--accent);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(59, 130, 246, .12);
+}
+
+.categorized-tools-panel h3 {
+    margin-bottom: 24px;
+    color: #fff;
+    font-size: 1.7rem;
+}
+
+.categorized-tools-list {
+    display: grid;
+    gap: 14px;
+}
+
+.tool-category-row {
+    display: grid;
+    grid-template-columns: 170px minmax(0, 1fr);
+    align-items: center;
+    gap: 20px;
+    min-height: 70px;
+    padding: 16px 18px;
+    border: 1px solid rgba(96, 165, 250, .22);
+    border-radius: 18px;
+    background: rgba(15, 23, 42, .42);
+}
+
+.tool-category-row:last-child {
+    border-bottom: 1px solid rgba(96, 165, 250, .22);
+}
+
+.tool-category-row h4 {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+    color: #f8fafc;
+    font-size: 1rem;
+}
+
+.category-icon {
+    width: 24px;
+    height: 24px;
+    flex: 0 0 24px;
+    fill: none;
+    stroke: var(--accent2);
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.category-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.category-items span {
+    display: inline-flex;
+    align-items: center;
+    min-height: 38px;
+    padding: 8px 14px;
+    border: 1px solid rgba(96, 165, 250, .3);
+    border-radius: 999px;
+    background: rgba(15, 23, 42, .62);
+    color: #dbeafe;
+    font-size: .88rem;
+    white-space: nowrap;
+    transition: border-color .25s ease, background .25s ease, color .25s ease, transform .25s ease;
+}
+
+.category-item-icon {
+    width: 21px;
+    height: 21px;
+    flex: 0 0 21px;
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
+.category-item-svg {
+    fill: none;
+    stroke: var(--accent2);
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.category-items span:hover {
+    border-color: var(--accent2);
+    background: rgba(37, 99, 235, .16);
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+/* Chaque catégorie possède son propre cadre indépendant. */
+.categorized-tools-panel {
+    margin-top: 28px;
+    padding: 0;
+    overflow: visible;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+.categorized-tools-panel > .panel-number,
+.categorized-tools-panel > h3 {
+    display: none;
+}
+
+.categorized-tools-panel:hover,
+.categorized-tools-panel:focus {
+    border-color: transparent;
+    transform: none;
+    box-shadow: none;
+}
+
+.categorized-tools-list {
+    gap: 16px;
+    counter-reset: tool-category 4;
+}
+
+.tool-category-row {
+    position: relative;
+    counter-increment: tool-category;
+    min-height: 84px;
+    padding: 18px 20px;
+    border-color: var(--border);
+    border-radius: 22px;
+    background: rgba(17, 24, 39, .72);
+    box-shadow: 0 14px 40px rgba(2, 6, 23, .16);
+}
+
+.tool-category-row::before {
+    content: counter(tool-category, decimal-leading-zero);
+    position: absolute;
+    top: 12px;
+    right: 18px;
+    color: rgba(148, 163, 184, .3);
+    font-size: 4.5rem;
+    font-weight: 800;
+    line-height: 1;
+    pointer-events: none;
+}
+
+@media (max-width: 900px) {
+    .skill-domains-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 520px) {
+    .skill-domains-panel {
+        padding: 28px 22px;
+    }
+
+    .skill-domains-list {
+        grid-template-columns: 1fr;
+    }
+
+    .categorized-tools-panel {
+        padding: 28px 22px;
+    }
+
+    .tool-category-row {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+}
+
+/* Animation des timelines : chaque carte rejoint la ligne centrale depuis son côté. */
+.timeline-item.scroll-reveal {
+    opacity: 0;
+    transform: translateX(-72px);
+    transition: opacity .7s ease, transform .75s cubic-bezier(.22, 1, .36, 1);
+}
+
+.timeline-item.scroll-reveal:nth-child(even) {
+    transform: translateX(72px);
+}
+
+.timeline-item.scroll-reveal.in-view {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.timeline-item.scroll-reveal:nth-child(2) { transition-delay: .08s; }
+.timeline-item.scroll-reveal:nth-child(3) { transition-delay: .16s; }
+
+@media (prefers-reduced-motion: reduce) {
+    .timeline-item.scroll-reveal,
+    .timeline-item.scroll-reveal:nth-child(even) {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
 }
 
 .tools-list {
@@ -1039,6 +1319,14 @@ body.single-page-sections #apropos.active-section {
     stroke-width: 1.8;
     stroke-linecap: round;
     stroke-linejoin: round;
+}
+
+.tool-item > i {
+    width: 21px;
+    flex: 0 0 21px;
+    color: var(--accent2);
+    font-size: 1rem;
+    text-align: center;
 }
 
 .tool-item .language-devicon {
@@ -1490,8 +1778,26 @@ body.light-theme .tool-item {
 
 .projects-grid {
     display: grid;
+    grid-template-columns: 1fr;
+    gap: 42px;
+}
+
+.project-group {
+    display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 22px;
+    min-width: 0;
+}
+
+.project-group-title {
+    grid-column: 1 / -1;
+    margin-top: 0;
+}
+
+.project-group-eni {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    overflow: visible;
+    padding-bottom: 0;
 }
 
 .all-repositories-link-wrap {
@@ -1520,6 +1826,12 @@ body.light-theme .tool-item {
     font-size: 1.1rem;
 }
 
+.all-repositories-icon {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+}
+
 .all-repositories-link:hover {
     color: #ffffff;
     border-color: var(--accent);
@@ -1546,10 +1858,6 @@ body.light-theme .tool-item {
     border-radius: 50%;
     background: var(--accent);
     box-shadow: 0 0 12px rgba(59, 130, 246, .7);
-}
-
-.project-group-title-faculty {
-    margin-top: 22px;
 }
 
 .project-card {
@@ -1603,7 +1911,7 @@ body.light-theme .tool-item {
 }
 
 .project-cover-linguistique {
-    background: linear-gradient(135deg, #fff7ed, #dcfce7) !important;
+    background: linear-gradient(135deg, #eff6ff, #dbeafe) !important;
 }
 
 .project-cover-linguistique img {
@@ -1918,7 +2226,7 @@ body.light-theme .tool-item {
 .android-list-card strong, .android-list-card small { display: block; }
 .android-list-card small { margin-top: 3px; color: #64748b; font-size: .61rem; }
 .android-list-card b { color: #2563eb; font-size: .65rem; }
-.android-list-icon { display: grid; place-items: center; width: 27px; height: 27px; border-radius: 8px; color: #fff; background: #22c55e; font-weight: 700; }
+.android-list-icon { display: grid; place-items: center; width: 27px; height: 27px; border-radius: 8px; color: #fff; background: #2563eb; font-weight: 700; }
 .android-list-icon.purple { background: #8b5cf6; }
 .android-bottom-nav { display: flex; justify-content: space-around; margin: 26px -2px 0; padding-top: 12px; border-top: 1px solid #e2e8f0; color: #94a3b8; font-size: 1rem; text-align: center; }
 .android-bottom-nav span { display: flex; flex-direction: column; gap: 2px; }
@@ -2152,7 +2460,15 @@ body.demo-open { overflow: hidden; }
     }
 
     .projects-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .project-group {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .project-group-eni {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
     .skills-category-grid,
@@ -2191,6 +2507,15 @@ body.demo-open { overflow: hidden; }
     .projects-grid {
         grid-template-columns: 1fr;
         gap: 18px;
+    }
+
+    .project-group {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .project-group-eni {
+        grid-template-columns: 1fr;
     }
 
     .project-card,
@@ -2377,6 +2702,448 @@ body.demo-open { overflow: hidden; }
     .android-dialog-footer .btn-primary {
         width: 100%;
         justify-content: center;
+    }
+}
+
+/* Cartes projets : en-tête bleu et corps sombre. */
+.project-card,
+.project-card-featured {
+    overflow: hidden;
+    padding: 0 24px 24px;
+    border: 2px solid #1e3a8a;
+    border-radius: 26px;
+    background: #0b162d;
+    box-shadow: 0 14px 30px rgba(0, 0, 0, .18);
+}
+
+.project-card-featured .project-cover {
+    display: flex;
+    height: 205px;
+    margin: 0 -24px 18px;
+    overflow: hidden;
+    background: #102449;
+}
+
+.project-card-featured .project-cover img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.project-title-row,
+.project-main-title-row {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin: 0 -24px 22px;
+    padding: 18px 24px 30px;
+    border-radius: 26px 26px 70px 0;
+    background: #2563eb;
+    color: #fff;
+    text-align: center;
+}
+
+.project-main-title-row .project-icon,
+.project-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+    min-height: 32px;
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: #fff;
+}
+
+.project-icon::after {
+    content: attr(title);
+    margin-left: 10px;
+    font-size: .92rem;
+    font-weight: 700;
+}
+
+.project-icon svg {
+    width: 36px;
+    height: 36px;
+    padding: 7px;
+    border: 1px solid rgba(255, 255, 255, .95);
+    border-radius: 50%;
+}
+
+.project-main-title-row h3,
+.project-title-row h3,
+.project-title-compact {
+    flex: 0 0 100%;
+    width: 100%;
+    margin: 0;
+    color: #fff;
+    font-size: 1rem !important;
+    line-height: 1.35;
+    white-space: normal;
+    letter-spacing: 0;
+}
+
+.project-github {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 30px;
+    height: 30px;
+    border-color: rgba(255, 255, 255, .45);
+    color: #fff;
+}
+
+.project-github:hover {
+    border-color: #fff;
+    background: rgba(255, 255, 255, .16);
+    color: #fff;
+}
+
+.project-desc {
+    min-height: 104px;
+    margin-bottom: 22px;
+    color: #b8c8e8;
+    font-size: .9rem;
+    line-height: 1.7;
+}
+
+.project-techs {
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.project-techs span {
+    padding: 7px 11px;
+    border: 1px solid #bfdbfe;
+    border-radius: 999px;
+    color: #1e3a8a;
+    background: #eff6ff;
+    font-size: .7rem;
+}
+
+.project-footer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-top: 16px;
+    margin-top: auto;
+}
+
+.btn-demo {
+    border-radius: 8px;
+    background: #2563eb;
+    color: #fff;
+    box-shadow: none;
+}
+
+.btn-demo:hover {
+    background: #1d4ed8;
+    transform: translateY(-2px);
+}
+
+.project-group-title {
+    color: #dbeafe;
+}
+
+.project-group-title::before {
+    background: #2563eb !important;
+    box-shadow: 0 0 12px rgba(59, 130, 246, .7) !important;
+}
+
+/* Palette bleue uniforme pour toutes les cartes de projets. */
+.project-card,
+.project-card-featured {
+    border-color: #1e3a8a !important;
+    background: #0b162d !important;
+}
+
+/* Le contenu de chaque projet reste regroupé dans le même fond sombre. */
+.project-card .project-desc,
+.project-card .project-techs,
+.project-card .project-footer,
+.project-card-featured .project-desc,
+.project-card-featured .project-techs,
+.project-card-featured .project-footer {
+    background: #0b162d;
+}
+
+.project-title-row,
+.project-main-title-row,
+.btn-demo {
+    background: #2563eb !important;
+}
+
+.project-card-featured .project-cover,
+.project-cover-linguistique,
+.project-cover-segmentation,
+.project-cover-taxibrousse,
+.project-cover-messagerie,
+.project-cover-portfolio,
+.project-cover-maison {
+    background: linear-gradient(135deg, #0f2b5c, #2563eb) !important;
+}
+
+/* En-tête intégré au cadre sombre, comme le rendu de référence. */
+.project-card,
+.project-card-featured {
+    padding: 28px 26px;
+    border: 1px solid var(--border) !important;
+    border-radius: 16px;
+    background: #111827 !important;
+    box-shadow: none;
+}
+
+.project-card-featured {
+    padding: 0 26px 28px;
+}
+
+.project-card-featured .project-cover {
+    height: 205px;
+    margin: 0 -26px 24px;
+}
+
+.project-title-row,
+.project-main-title-row {
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin: 0 0 10px;
+    padding: 0;
+    border-radius: 0;
+    background: transparent !important;
+    text-align: left;
+}
+
+.project-main-title-row .project-icon,
+.project-icon {
+    width: 50px;
+    height: 50px;
+    min-height: 50px;
+    flex: 0 0 50px;
+    border: 1px solid rgba(59,130,246,.3);
+    border-radius: 50%;
+    background: rgba(59,130,246,.10);
+    color: var(--accent);
+}
+
+.project-icon::after {
+    content: none;
+}
+
+.project-icon svg {
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+}
+
+.project-main-title-row h3,
+.project-title-row h3,
+.project-title-compact {
+    flex: 1;
+    width: auto;
+    color: #fff;
+    font-size: .86rem !important;
+    letter-spacing: -.55px;
+    text-align: left;
+}
+
+.project-github {
+    position: static;
+    width: 42px;
+    height: 42px;
+    flex: 0 0 42px;
+    border-color: var(--border);
+    color: var(--muted);
+}
+
+.project-desc {
+    min-height: 0;
+    color: var(--muted);
+    font-size: .88rem;
+    margin-bottom: 20px;
+}
+
+.project-techs span {
+    padding: 5px 11px;
+    border: 1px solid rgba(59,130,246,.42);
+    color: var(--accent2);
+    background: rgba(59,130,246,.08);
+    font-size: .76rem;
+}
+
+/* Variante inspirée des cartes Henri-Parfait, adaptée à la palette bleue. */
+.project-card,
+.project-card-featured {
+    overflow: hidden;
+    padding: 0 24px 24px;
+    border: 2px solid #1e3a8a !important;
+    border-radius: 26px;
+    background: #0b162d !important;
+    box-shadow: 0 14px 30px rgba(0, 0, 0, .18);
+}
+
+.project-card-featured .project-cover {
+    height: 205px;
+    margin: 0 -24px 18px;
+}
+
+.project-title-row,
+.project-main-title-row {
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 0 -24px 22px;
+    padding: 18px 24px 30px;
+    border-radius: 26px 26px 70px 0;
+    background: #2563eb !important;
+    color: #fff;
+    text-align: center;
+}
+
+.project-main-title-row .project-icon,
+.project-icon {
+    width: 100%;
+    height: auto;
+    min-height: 32px;
+    flex: 0 0 100%;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: #fff;
+}
+
+.project-icon::after {
+    content: attr(title);
+    margin-left: 10px;
+    font-size: .92rem;
+    font-weight: 700;
+}
+
+.project-icon svg {
+    width: 36px;
+    height: 36px;
+    padding: 7px;
+    border: 1px solid rgba(255,255,255,.95);
+    border-radius: 50%;
+}
+
+.project-main-title-row h3,
+.project-title-row h3,
+.project-title-compact {
+    flex: 0 0 100%;
+    width: 100%;
+    color: #fff;
+    font-size: 1rem !important;
+    line-height: 1.35;
+    text-align: center;
+}
+
+.project-github {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 30px;
+    height: 30px;
+    color: #fff;
+    border-color: rgba(255,255,255,.45);
+}
+
+.project-desc {
+    min-height: 104px;
+    margin-bottom: 22px;
+    color: #b8c8e8;
+}
+
+.project-techs span {
+    padding: 7px 11px;
+    border: 1px solid #bfdbfe;
+    color: #1e3a8a;
+    background: #eff6ff;
+    font-size: .7rem;
+}
+
+.project-footer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-top: 16px;
+}
+
+.btn-demo {
+    border-radius: 8px;
+    background: #2563eb !important;
+    color: #fff;
+}
+
+.btn-demo:hover {
+    background: #1d4ed8 !important;
+}
+
+/* Fond intérieur permanent des cartes projets. */
+.project-card,
+.project-card-featured,
+.project-card .project-desc,
+.project-card .project-techs,
+.project-card .project-footer,
+.project-card-featured .project-desc,
+.project-card-featured .project-techs,
+.project-card-featured .project-footer {
+    background-color: #0b162d !important;
+}
+
+.project-card-content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-width: 0;
+}
+
+/* Fond du cadre identique au bleu nuit de référence. */
+.project-title-row,
+.project-main-title-row {
+    background: #0b162d !important;
+}
+
+/* Le cadre autour des aperçus reprend également le fond normal. */
+.project-card-featured .project-cover,
+.project-cover-linguistique,
+.project-cover-segmentation,
+.project-cover-taxibrousse,
+.project-cover-messagerie,
+.project-cover-portfolio,
+.project-cover-maison {
+    background: #0b162d !important;
+}
+
+@media (max-width: 768px) {
+    .project-card,
+    .project-card-featured {
+        padding: 0 18px 22px;
+        border-radius: 24px;
+    }
+
+    .project-title-row,
+    .project-main-title-row {
+        margin-inline: -18px;
+        padding-inline: 18px;
+    }
+
+    .project-card-featured .project-cover {
+        height: clamp(170px, 48vw, 230px);
+        margin-inline: -18px;
+        margin-bottom: 18px;
+    }
+
+    .project-desc {
+        min-height: 0;
     }
 }
 
@@ -3505,3 +4272,2054 @@ body.menu-open { overflow: hidden; }
     .site-footer,
     .back-to-top { display: none !important; }
 }
+
+/* La zone visuelle occupe toute la largeur du card sans ajouter de fond. */
+.project-card-featured .project-cover {
+    width: calc(100% + 52px);
+    height: 205px;
+    margin-inline: -26px;
+    background: transparent !important;
+}
+
+.project-card-featured .project-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover !important;
+    object-position: center;
+    background: transparent;
+}
+
+/* Les conteneurs parents suivent exactement le cadre de l'image. */
+.project-card-featured {
+    display: flex;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    flex-direction: column;
+}
+
+.project-card-featured .project-cover,
+.project-card-featured .project-card-content {
+    align-self: stretch;
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+.project-card-featured .project-card-content,
+.project-card-featured .project-card-content > *,
+.project-card-featured .project-desc,
+.project-card-featured .project-techs,
+.project-card-featured .project-footer {
+    width: 100%;
+    background: transparent !important;
+}
+
+@media (max-width: 768px) {
+    .project-card-featured .project-cover {
+        width: calc(100% + 36px);
+        margin-inline: -18px;
+    }
+}
+
+/* Aperçu normal et contenu du card transparent. */
+.project-cover-linguistique {
+    background: transparent !important;
+}
+
+.project-cover-linguistique img {
+    object-fit: cover !important;
+    opacity: 1;
+}
+
+/* L'aperçu vertical conserve son ratio natif pour afficher toute l'image. */
+.project-card-featured .project-cover-linguistique {
+    height: auto !important;
+    aspect-ratio: 262 / 528;
+}
+
+.project-card-featured .project-cover-linguistique img {
+    object-fit: contain !important;
+}
+
+.project-card-featured .project-card-content {
+    background: transparent !important;
+}
+
+/* La partie descriptive de Linguistique Régionale reste transparente, comme une vitrine. */
+.project-card-linguistique,
+.project-card-linguistique .project-card-content,
+.project-card-linguistique .project-desc,
+.project-card-linguistique .project-techs,
+.project-card-linguistique .project-footer {
+    background: transparent !important;
+}
+
+/* Présentation vitrine : l'image devient l'arrière-plan du card. */
+.project-card-linguistique {
+    position: relative;
+    min-height: 740px;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.project-card-linguistique .project-cover {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100% !important;
+    margin: 0;
+    aspect-ratio: auto;
+    background: transparent !important;
+}
+
+.project-card-linguistique .project-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover !important;
+    object-position: center;
+}
+
+.project-card-linguistique .project-title-row,
+.project-card-linguistique .project-main-title-row {
+    position: relative;
+    z-index: 1;
+    margin-inline: -24px;
+    padding-inline: 24px;
+    background: rgba(11, 22, 45, .62) !important;
+    backdrop-filter: blur(3px);
+}
+
+.project-card-linguistique .project-card-content {
+    position: relative;
+    z-index: 1;
+    margin-inline: -24px;
+    margin-top: auto;
+    padding: 180px 24px 24px;
+    background: linear-gradient(180deg, transparent 0%, rgba(11, 22, 45, .62) 35%, rgba(11, 22, 45, .94) 100%) !important;
+}
+
+@media (max-width: 768px) {
+    .project-card-linguistique {
+        min-height: 700px;
+    }
+
+    .project-card-linguistique .project-title-row,
+    .project-card-linguistique .project-main-title-row,
+    .project-card-linguistique .project-card-content {
+        margin-inline: -18px;
+    }
+
+    .project-card-linguistique .project-card-content {
+        padding-inline: 18px;
+    }
+}
+
+/* Rendu normal des cards : image en haut et contenu lisible en dessous. */
+.project-card-featured {
+    position: relative;
+    min-height: 0 !important;
+    overflow: hidden;
+    isolation: auto;
+    display: flex;
+    flex-direction: column;
+    background: #0b162d !important;
+}
+
+.project-card-featured > .project-cover,
+.project-card-featured .project-cover {
+    position: relative;
+    inset: auto;
+    z-index: auto;
+    width: calc(100% + 48px);
+    height: 205px !important;
+    margin: 0 -24px 18px;
+    aspect-ratio: auto;
+    background: #0b162d !important;
+}
+
+.project-card-featured .project-cover img,
+.project-card-featured .project-cover-linguistique img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain !important;
+    object-position: center;
+    opacity: 1;
+}
+
+.project-card-featured .project-title-row,
+.project-card-featured .project-main-title-row {
+    position: relative !important;
+    z-index: auto;
+    justify-content: space-between;
+    gap: 16px;
+    margin: 0 0 10px;
+    padding: 0;
+    border-radius: 0;
+    background: transparent !important;
+    text-align: left;
+    backdrop-filter: none;
+}
+
+.project-card-featured .project-card-content,
+.project-card-featured > .project-desc,
+.project-card-featured > .project-techs,
+.project-card-featured > .project-footer {
+    position: static;
+    z-index: auto;
+    width: auto;
+    margin: 0;
+    padding: 0;
+    background: #0b162d !important;
+}
+
+.project-card-featured .project-card-content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+.project-card-featured .project-desc {
+    margin-bottom: 20px;
+    padding: 0;
+}
+
+.project-card-featured .project-footer {
+    margin-top: auto;
+    padding-top: 16px;
+}
+
+@media (max-width: 768px) {
+    .project-card-featured > .project-cover,
+    .project-card-featured .project-cover {
+        width: calc(100% + 36px);
+        margin-inline: -18px;
+    }
+}
+/* Même présentation vitrine pour tous les projets académiques illustrés. */
+.project-card-featured:not(.project-card-linguistique) {
+    position: relative;
+    min-height: 560px;
+    overflow: hidden;
+    isolation: isolate;
+    background: transparent !important;
+}
+
+.project-card-featured:not(.project-card-linguistique) > .project-cover {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100% !important;
+    margin: 0;
+    background: transparent !important;
+}
+
+.project-card-featured:not(.project-card-linguistique) > .project-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain !important;
+    object-position: center;
+    background: transparent;
+}
+
+.project-card-featured:not(.project-card-linguistique) > .project-title-row,
+.project-card-featured:not(.project-card-linguistique) > .project-main-title-row {
+    position: relative;
+    z-index: 1;
+    margin-inline: -24px;
+    padding-inline: 24px;
+    background: rgba(11, 22, 45, .62) !important;
+    backdrop-filter: blur(3px);
+}
+
+.project-card-featured:not(.project-card-linguistique) > .project-desc {
+    position: relative;
+    z-index: 1;
+    margin-top: auto;
+    margin-inline: -24px;
+    padding: 180px 24px 0;
+    background: linear-gradient(180deg, transparent 0%, rgba(11, 22, 45, .62) 35%, rgba(11, 22, 45, .94) 100%) !important;
+}
+
+.project-card-featured:not(.project-card-linguistique) > .project-techs,
+.project-card-featured:not(.project-card-linguistique) > .project-footer {
+    position: relative;
+    z-index: 1;
+    margin-inline: -24px;
+    padding-inline: 24px;
+    background: rgba(11, 22, 45, .94) !important;
+}
+
+@media (max-width: 768px) {
+    .project-card-featured:not(.project-card-linguistique) > .project-title-row,
+    .project-card-featured:not(.project-card-linguistique) > .project-main-title-row,
+    .project-card-featured:not(.project-card-linguistique) > .project-desc,
+    .project-card-featured:not(.project-card-linguistique) > .project-techs,
+    .project-card-featured:not(.project-card-linguistique) > .project-footer {
+        margin-inline: -18px;
+        padding-inline: 18px;
+    }
+}
+
+/* Carte Linguistique Régionale : affichage classique, lisible et cohérent
+   avec le contenu des autres projets. */
+.project-card-linguistique {
+    min-height: 0;
+    overflow: hidden;
+    isolation: auto;
+    background: var(--card, rgba(255, 255, 255, .04)) !important;
+}
+
+.project-card-linguistique .project-cover {
+    position: relative;
+    inset: auto;
+    z-index: auto;
+    width: calc(100% + 52px);
+    height: 240px !important;
+    margin-inline: -26px;
+    aspect-ratio: auto;
+    background: transparent !important;
+}
+
+.project-card-linguistique .project-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain !important;
+    object-position: center;
+}
+
+.project-card-linguistique .project-title-row,
+.project-card-linguistique .project-main-title-row,
+.project-card-linguistique .project-card-content {
+    position: static;
+    z-index: auto;
+    margin-inline: 0;
+    padding: 0;
+    background: transparent !important;
+    backdrop-filter: none;
+}
+
+.project-card-linguistique .project-card-content {
+    padding-top: 18px;
+}
+
+.project-card-linguistique .project-desc,
+.project-card-linguistique .project-techs,
+.project-card-linguistique .project-footer {
+    position: static;
+    width: auto;
+    margin-inline: 0;
+    padding: 0;
+    background: transparent !important;
+}
+
+.project-card-linguistique .project-techs {
+    margin-top: 16px;
+}
+
+.project-card-linguistique .project-footer {
+    margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+    .project-card-linguistique .project-cover {
+        width: calc(100% + 36px);
+        margin-inline: -18px;
+    }
+}
+
+/* Affichage uniforme des images de toutes les cartes projet. */
+.project-card-featured:not(.project-card-linguistique) {
+    position: relative;
+    min-height: 0;
+    overflow: hidden;
+    isolation: auto;
+    padding: 0 26px 28px;
+    background: var(--card) !important;
+}
+
+.project-card-featured:not(.project-card-linguistique) > .project-cover {
+    position: relative;
+    inset: auto;
+    z-index: auto;
+    width: calc(100% + 52px);
+    height: 220px !important;
+    margin: 0 -26px 24px;
+    background: #172554 !important;
+}
+
+.project-card-featured:not(.project-card-linguistique) > .project-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain !important;
+    object-position: center;
+}
+
+.project-card-featured:not(.project-card-linguistique) > .project-title-row,
+.project-card-featured:not(.project-card-linguistique) > .project-main-title-row,
+.project-card-featured:not(.project-card-linguistique) > .project-desc,
+.project-card-featured:not(.project-card-linguistique) > .project-techs,
+.project-card-featured:not(.project-card-linguistique) > .project-footer {
+    position: static;
+    z-index: auto;
+    width: auto;
+    margin-inline: 0;
+    padding-inline: 0;
+    background: transparent !important;
+    backdrop-filter: none;
+}
+
+/* Linguistique Régionale : vitrine avec l’image en arrière-plan. */
+.project-card-linguistique {
+    position: relative;
+    min-height: 650px;
+    overflow: hidden;
+    isolation: isolate;
+    padding: 0 26px 28px;
+    background: #0b162d !important;
+}
+
+.project-card-linguistique > .project-cover {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100% !important;
+    margin: 0;
+    background: #0b162d !important;
+}
+
+.project-card-linguistique > .project-cover::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(5, 12, 28, .18) 0%, rgba(5, 12, 28, .18) 36%, rgba(5, 12, 28, .96) 100%);
+}
+
+.project-card-linguistique > .project-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover !important;
+    object-position: center;
+}
+
+.project-card-linguistique > .project-title-row,
+.project-card-linguistique > .project-main-title-row {
+    position: relative;
+    z-index: 1;
+    margin-inline: -26px;
+    padding: 24px 26px 16px;
+    background: rgba(7, 18, 40, .72) !important;
+    backdrop-filter: blur(5px);
+}
+
+.project-card-linguistique > .project-card-content {
+    position: relative;
+    z-index: 1;
+    margin-inline: -26px;
+    margin-top: auto;
+    padding: 250px 26px 0;
+    background: linear-gradient(180deg, transparent 0%, rgba(7, 18, 40, .74) 34%, rgba(7, 18, 40, .97) 100%) !important;
+}
+
+.project-card-linguistique .project-desc,
+.project-card-linguistique .project-techs,
+.project-card-linguistique .project-footer {
+    position: static;
+    width: auto;
+    margin-inline: 0;
+    padding-inline: 0;
+    background: transparent !important;
+}
+
+@media (max-width: 768px) {
+    .project-card-featured:not(.project-card-linguistique),
+    .project-card-linguistique {
+        padding-inline: 18px;
+    }
+
+    .project-card-featured:not(.project-card-linguistique) > .project-cover {
+        width: calc(100% + 36px);
+        margin-inline: -18px;
+    }
+
+    .project-card-linguistique {
+        min-height: 680px;
+    }
+
+    .project-card-linguistique > .project-title-row,
+    .project-card-linguistique > .project-main-title-row,
+    .project-card-linguistique > .project-card-content {
+        margin-inline: -18px;
+        padding-inline: 18px;
+    }
+}
+
+/* Surcharge finale : affichage classique sans superposition du texte sur l'image. */
+.project-card-featured {
+    position: relative !important;
+    min-height: 0 !important;
+    isolation: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    background: #0b162d !important;
+}
+
+.project-card-featured .project-cover {
+    position: relative !important;
+    inset: auto !important;
+    z-index: auto !important;
+    width: calc(100% + 48px) !important;
+    height: 205px !important;
+    margin: 0 -24px 18px !important;
+    aspect-ratio: auto !important;
+    background: #0b162d !important;
+}
+
+.project-card-featured .project-cover img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    opacity: 1 !important;
+}
+
+.project-card-featured .project-title-row,
+.project-card-featured .project-main-title-row {
+    position: relative !important;
+    z-index: auto !important;
+    margin: 0 0 10px !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    backdrop-filter: none !important;
+}
+
+.project-card-featured .project-card-content,
+.project-card-featured > .project-desc,
+.project-card-featured > .project-techs,
+.project-card-featured > .project-footer {
+    position: static !important;
+    z-index: auto !important;
+    width: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #0b162d !important;
+}
+
+.project-card-featured .project-card-content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+.project-card-featured .project-desc {
+    margin-bottom: 20px !important;
+}
+
+.project-card-featured .project-footer {
+    margin-top: auto !important;
+    padding-top: 16px !important;
+}
+
+@media (max-width: 768px) {
+    .project-card-featured .project-cover {
+        width: calc(100% + 36px) !important;
+        margin-inline: -18px !important;
+    }
+}
+
+/* Présentation vitrine finale de Linguistique Régionale. */
+.project-card-featured.project-card-linguistique {
+    min-height: 650px !important;
+    overflow: hidden !important;
+    padding: 0 26px 28px !important;
+    background: #0b162d !important;
+    isolation: isolate !important;
+}
+
+.project-card-featured.project-card-linguistique > .project-cover {
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: -1 !important;
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    background: #0b162d !important;
+}
+
+.project-card-featured.project-card-linguistique > .project-cover::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(5, 12, 28, .15), rgba(5, 12, 28, .22) 34%, rgba(5, 12, 28, .97) 100%);
+}
+
+.project-card-featured.project-card-linguistique > .project-cover img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+}
+
+.project-card-featured.project-card-linguistique > .project-title-row {
+    position: relative !important;
+    z-index: 1 !important;
+    margin: 0 -26px !important;
+    padding: 24px 26px 16px !important;
+    background: rgba(7, 18, 40, .72) !important;
+    backdrop-filter: blur(5px) !important;
+}
+
+.project-card-featured.project-card-linguistique > .project-card-content {
+    position: relative !important;
+    z-index: 1 !important;
+    margin: auto -26px 0 !important;
+    padding: 250px 26px 0 !important;
+    background: linear-gradient(180deg, transparent, rgba(7, 18, 40, .74) 35%, rgba(7, 18, 40, .97)) !important;
+}
+
+.project-card-featured.project-card-linguistique .project-desc,
+.project-card-featured.project-card-linguistique .project-techs,
+.project-card-featured.project-card-linguistique .project-footer {
+    background: transparent !important;
+}
+
+@media (max-width: 768px) {
+    .project-card-featured.project-card-linguistique {
+        min-height: 680px !important;
+        padding-inline: 18px !important;
+    }
+
+    .project-card-featured.project-card-linguistique > .project-title-row,
+    .project-card-featured.project-card-linguistique > .project-card-content {
+        margin-inline: -18px !important;
+        padding-inline: 18px !important;
+    }
+}
+
+/* Finition moderne de la section Projets académiques. */
+#projets {
+    position: relative;
+}
+
+#projets .projects-grid {
+    gap: 54px;
+}
+
+#projets .project-group {
+    align-items: stretch;
+    gap: 24px;
+}
+
+#projets .project-group-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 2px;
+    padding: 0 0 12px;
+    color: var(--text);
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: .01em;
+    border-bottom: 1px solid var(--line);
+}
+
+#projets .project-group-title::before {
+    width: 8px;
+    height: 8px;
+    margin: 0;
+    flex: 0 0 8px;
+    background: var(--accent);
+    box-shadow: 0 0 16px rgba(59, 130, 246, .85);
+}
+
+#projets .project-card {
+    min-width: 0;
+    border-color: rgba(96, 165, 250, .22);
+    background: linear-gradient(160deg, rgba(17, 24, 39, .98), rgba(10, 20, 39, .98));
+    box-shadow: 0 12px 28px rgba(0, 0, 0, .16);
+}
+
+#projets .project-card:hover {
+    border-color: rgba(96, 165, 250, .72);
+    box-shadow: 0 18px 38px rgba(37, 99, 235, .18);
+}
+
+#projets .project-cover {
+    border-bottom: 1px solid rgba(96, 165, 250, .18);
+}
+
+#projets .project-title-row {
+    min-height: 46px;
+}
+
+#projets .project-desc {
+    min-height: 4.5em;
+}
+
+#projets .project-techs {
+    min-height: 34px;
+    align-items: center;
+}
+
+#projets .project-footer {
+    margin-top: auto;
+    align-items: stretch;
+}
+
+#projets .btn-demo,
+#projets .btn-github {
+    min-height: 36px;
+}
+
+@media (max-width: 980px) {
+    #projets .project-group {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 640px) {
+    #projets .projects-grid {
+        gap: 38px;
+    }
+
+    #projets .project-group {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    #projets .project-group-title {
+        margin-bottom: 4px;
+    }
+}
+
+/* Zone de contenu moderne : image en haut, texte et actions en bas. */
+#projets .project-card-featured {
+    background: linear-gradient(180deg, #172554 0%, #111827 31%, #0b162d 100%) !important;
+}
+
+#projets .project-card-featured > .project-cover {
+    flex: 0 0 205px;
+    background: linear-gradient(135deg, #172554, #1e3a8a) !important;
+}
+
+#projets .project-card-featured > .project-title-row,
+#projets .project-card-featured > .project-desc,
+#projets .project-card-featured > .project-techs,
+#projets .project-card-featured > .project-footer {
+    position: relative;
+    z-index: 1;
+}
+
+#projets .project-card-featured > .project-title-row {
+    margin-bottom: 12px !important;
+    padding-top: 2px;
+}
+
+#projets .project-card-featured > .project-desc {
+    padding-top: 14px !important;
+    border-top: 1px solid rgba(96, 165, 250, .16);
+    color: #cbd5e1 !important;
+    background: linear-gradient(180deg, rgba(30, 58, 138, .16), transparent) !important;
+}
+
+#projets .project-card-featured > .project-techs {
+    margin-top: 10px;
+    padding-top: 8px !important;
+}
+
+#projets .project-card-featured > .project-footer {
+    margin-top: auto;
+    padding-top: 12px !important;
+    border-top: 1px solid rgba(96, 165, 250, .12);
+}
+
+#projets .project-card-linguistique > .project-card-content {
+    margin-top: 0 !important;
+    padding: 14px 0 0 !important;
+    border-top: 1px solid rgba(96, 165, 250, .16);
+    background: linear-gradient(180deg, rgba(30, 58, 138, .16), transparent) !important;
+}
+
+#projets .project-card-linguistique .project-desc {
+    margin-bottom: 14px !important;
+    color: #cbd5e1 !important;
+}
+
+#projets .project-card-linguistique .project-techs {
+    margin-top: 10px;
+}
+
+#projets .project-card-linguistique .project-footer {
+    margin-top: 12px !important;
+    padding-top: 12px !important;
+    border-top: 1px solid rgba(96, 165, 250, .12);
+}
+
+/* Pagination moderne des groupes de projets. */
+#projets .project-pagination {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    margin: -4px 0 2px;
+}
+
+#projets .project-page-status {
+    min-width: 42px;
+    color: var(--muted);
+    font-size: .78rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+#projets .project-page-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(96, 165, 250, .45);
+    border-radius: 50%;
+    background: rgba(30, 64, 175, .18);
+    color: var(--accent2);
+    cursor: pointer;
+    font-size: 1.1rem;
+    line-height: 1;
+    transition: background .25s, border-color .25s, color .25s, transform .2s;
+}
+
+#projets .project-page-button:hover:not(:disabled) {
+    border-color: var(--accent2);
+    background: var(--accent);
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+#projets .project-page-button:disabled {
+    cursor: not-allowed;
+    opacity: .32;
+}
+
+#projets .project-card[hidden] {
+    display: none !important;
+}
+
+/* Animation individuelle des timelines : chaque carte rejoint la ligne centrale depuis son côté. */
+.timeline-item.scroll-reveal {
+    opacity: 0 !important;
+    transform: translateX(-72px) !important;
+    transition: opacity .7s ease, transform .75s cubic-bezier(.22, 1, .36, 1) !important;
+}
+
+.timeline-item.scroll-reveal:nth-child(even) {
+    transform: translateX(72px) !important;
+}
+
+.timeline-item.scroll-reveal.in-view {
+    opacity: 1 !important;
+    transform: translateX(0) !important;
+}
+
+.timeline-item.scroll-reveal:nth-child(2) { transition-delay: .08s !important; }
+.timeline-item.scroll-reveal:nth-child(3) { transition-delay: .16s !important; }
+
+@media (prefers-reduced-motion: reduce) {
+    .timeline-item.scroll-reveal,
+    .timeline-item.scroll-reveal:nth-child(even) {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+    }
+}
+
+
+#projets .project-card.project-filter-hidden {
+    display: none !important;
+}
+
+@media (max-width: 640px) {
+    #projets .project-pagination {
+        justify-content: center;
+        margin-bottom: 6px;
+    }
+}
+
+/* Style vitrine inspiré de la référence : image, tags superposés et actions en bas. */
+#projets .project-card-featured {
+    position: relative !important;
+    min-height: 438px !important;
+    padding: 0 20px 20px !important;
+    border: 1px solid rgba(148, 163, 184, .62) !important;
+    border-radius: 28px !important;
+    background: #050807 !important;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, .18);
+}
+
+#projets .project-card-featured:hover {
+    border-color: var(--accent2) !important;
+    box-shadow: 0 18px 36px rgba(37, 99, 235, .22);
+}
+
+#projets .project-card-featured > .project-cover {
+    height: 176px !important;
+    flex: 0 0 176px !important;
+    width: calc(100% + 40px) !important;
+    margin: 0 -20px 18px !important;
+    border-radius: 27px 27px 0 0;
+    border-bottom: 1px solid rgba(148, 163, 184, .28);
+    background: #101827 !important;
+}
+
+#projets .project-card-featured > .project-cover img {
+    object-fit: cover !important;
+}
+
+#projets .project-card-featured .project-title-row {
+    min-height: 42px;
+    margin-bottom: 8px !important;
+}
+
+#projets .project-card-featured .project-title-compact {
+    font-size: 1rem !important;
+    letter-spacing: -.2px;
+}
+
+#projets .project-card-featured > .project-desc,
+#projets .project-card-featured .project-desc {
+    display: -webkit-box;
+    overflow: hidden;
+    min-height: 0 !important;
+    margin-bottom: 14px !important;
+    padding-top: 0 !important;
+    border-top: 0 !important;
+    color: #aeb8c7 !important;
+    font-size: .84rem;
+    line-height: 1.55;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+}
+
+#projets .project-card-featured .project-techs {
+    position: absolute !important;
+    top: 16px;
+    left: 16px;
+    z-index: 3;
+    display: flex;
+    width: calc(100% - 32px);
+    min-height: 0;
+    margin: 0 !important;
+    gap: 7px;
+    flex-wrap: wrap;
+}
+
+#projets .project-card-featured .project-techs span {
+    padding: 5px 10px !important;
+    border: 1px solid rgba(148, 163, 184, .8) !important;
+    border-radius: 999px !important;
+    color: #f8fafc !important;
+    background: rgba(3, 7, 18, .82) !important;
+    font-size: .68rem !important;
+    line-height: 1;
+    backdrop-filter: blur(5px);
+}
+
+/* Placement final : technologies dans le contenu, jamais sur l’image. */
+#projets .project-card-featured .project-techs {
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    z-index: auto !important;
+    display: flex !important;
+    width: auto !important;
+    margin: 10px 0 0 !important;
+    padding: 0 !important;
+    gap: 6px !important;
+    flex-wrap: wrap !important;
+    pointer-events: auto;
+}
+
+#projets .project-card-featured .project-techs span {
+    padding: 4px 9px !important;
+    border: 1px solid rgba(59, 130, 246, .62) !important;
+    border-radius: 999px !important;
+    color: #60a5fa !important;
+    background: rgba(12, 27, 55, .92) !important;
+    font-size: .64rem !important;
+    line-height: 1.1 !important;
+}
+
+/* Règle finale : pastilles réellement superposées à l’image. */
+#projets .project-card-featured .project-techs {
+    position: absolute !important;
+    top: 12px !important;
+    left: 12px !important;
+    z-index: 100 !important;
+    width: calc(100% - 24px) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    gap: 6px !important;
+    pointer-events: none !important;
+}
+
+#projets .project-card-featured .project-techs span {
+    background: rgba(3, 7, 18, .86) !important;
+    color: #f8fafc !important;
+    border-color: rgba(148, 163, 184, .86) !important;
+}
+
+/* Réduction légère de la hauteur des cartes. */
+#projets .project-card-featured {
+    padding-bottom: 10px !important;
+}
+
+#projets .project-card-featured > .project-cover {
+    height: 120px !important;
+    flex-basis: 120px !important;
+    margin-bottom: 12px !important;
+}
+
+#projets .project-card-featured .project-title-row {
+    min-height: 28px !important;
+    margin-bottom: 4px !important;
+}
+
+#projets .project-card-featured .project-desc {
+    max-height: 2.7em !important;
+    margin-bottom: 5px !important;
+    line-height: 1.35 !important;
+}
+
+#projets .project-card-featured .project-techs {
+    margin-top: 6px !important;
+}
+
+#projets .project-card-featured .project-footer {
+    margin-top: 8px !important;
+    padding-top: 6px !important;
+}
+
+/* Placement demandé : les technologies flottent sur l’image du projet. */
+#projets .project-card-featured {
+    position: relative !important;
+}
+
+#projets .project-card-featured .project-techs {
+    position: absolute !important;
+    top: 12px !important;
+    left: 12px !important;
+    z-index: 30 !important;
+    display: flex !important;
+    width: calc(100% - 24px) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    gap: 6px !important;
+    flex-wrap: wrap !important;
+    pointer-events: none !important;
+}
+
+#projets .project-card-featured .project-techs span {
+    padding: 4px 9px !important;
+    border: 1px solid rgba(148, 163, 184, .86) !important;
+    border-radius: 999px !important;
+    color: #f8fafc !important;
+    background: rgba(3, 7, 18, .84) !important;
+    font-size: .64rem !important;
+    line-height: 1.1 !important;
+    white-space: nowrap;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .2);
+    backdrop-filter: blur(5px);
+}
+
+#projets .project-card-featured > .project-footer {
+    margin-top: 14px !important;
+}
+
+/* Format compact et équilibré pour chaque carte projet. */
+#projets .project-card-featured {
+    min-height: 0 !important;
+    padding: 0 16px 16px !important;
+    border-radius: 20px !important;
+}
+
+#projets .project-card-featured > .project-cover {
+    height: 150px !important;
+    flex-basis: 150px !important;
+    width: calc(100% + 32px) !important;
+    margin: 0 -16px 14px !important;
+    border-radius: 19px 19px 0 0 !important;
+}
+
+#projets .project-card-featured .project-title-row {
+    min-height: 36px;
+    margin-bottom: 6px !important;
+}
+
+#projets .project-card-featured .project-desc {
+    display: -webkit-box;
+    margin-bottom: 8px !important;
+    font-size: .78rem;
+    line-height: 1.45;
+    -webkit-line-clamp: 2;
+}
+
+#projets .project-card-featured .project-techs {
+    top: 12px !important;
+    left: 12px !important;
+    width: calc(100% - 24px) !important;
+    gap: 5px !important;
+}
+
+#projets .project-card-featured .project-techs span {
+    padding: 4px 8px !important;
+    font-size: .62rem !important;
+}
+
+#projets .project-card-featured .project-footer {
+    gap: 7px;
+    padding-top: 8px !important;
+}
+
+#projets .project-card-featured .btn-demo,
+#projets .project-card-featured .btn-github {
+    min-height: 32px;
+    padding: 6px 10px;
+    font-size: .68rem;
+}
+
+@media (max-width: 640px) {
+    #projets .project-card-featured > .project-cover {
+        height: 140px !important;
+        flex-basis: 140px !important;
+    }
+}
+
+/* Grille de trois cartes par ligne sur grand écran. */
+@media (min-width: 1200px) {
+    #projets .project-group {
+        grid-template-columns: repeat(3, minmax(240px, 320px)) !important;
+        justify-content: center;
+        gap: 20px;
+    }
+}
+
+/* Dimensions normales et compactes des cartes. */
+#projets .project-card-featured {
+    width: 100%;
+    min-height: 0 !important;
+    height: auto !important;
+    padding-bottom: 14px !important;
+}
+
+#projets .project-card-featured > .project-cover {
+    height: 135px !important;
+    flex-basis: 135px !important;
+}
+
+#projets .project-card-featured .project-title-row {
+    min-height: 32px;
+}
+
+#projets .project-card-featured .project-desc {
+    max-height: 3.1em;
+    margin-bottom: 6px !important;
+}
+
+@media (max-width: 1199px) and (min-width: 641px) {
+    #projets .project-group {
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    }
+}
+
+@media (max-width: 640px) {
+    #projets .project-card-featured > .project-cover {
+        height: 125px !important;
+        flex-basis: 125px !important;
+    }
+}
+
+/* Les technologies se placent au premier plan sur l’image. */
+#projets .project-card-featured {
+    position: relative !important;
+}
+
+#projets .project-card-featured .project-techs {
+    position: absolute !important;
+    top: 12px !important;
+    left: 12px !important;
+    z-index: 50 !important;
+    width: calc(100% - 24px) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex !important;
+    gap: 6px !important;
+    flex-wrap: wrap !important;
+    pointer-events: none;
+}
+
+#projets .project-card-featured .project-techs span {
+    position: relative;
+    z-index: 51;
+    padding: 4px 9px !important;
+    border: 1px solid rgba(148, 163, 184, .9) !important;
+    border-radius: 999px !important;
+    color: #f8fafc !important;
+    background: rgba(3, 7, 18, .86) !important;
+    font-size: .64rem !important;
+    line-height: 1 !important;
+    white-space: nowrap;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .18);
+}
+
+@media (min-width: 641px) and (max-width: 1199px) {
+    #projets .project-group {
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    }
+}
+
+#projets .project-card-featured > .project-footer,
+#projets .project-card-featured .project-footer {
+    margin-top: auto !important;
+    padding: 12px 0 0 !important;
+    border-top: 0 !important;
+    gap: 10px;
+}
+
+#projets .project-card-featured .btn-demo,
+#projets .project-card-featured .btn-github {
+    min-height: 34px;
+    flex: 1 1 0;
+    justify-content: center;
+    border: 1px solid rgba(148, 163, 184, .65) !important;
+    border-radius: 999px !important;
+    background: transparent !important;
+    color: #dbeafe !important;
+    font-size: .72rem;
+}
+
+#projets .project-card-featured .btn-demo:hover,
+#projets .project-card-featured .btn-github:hover {
+    border-color: var(--accent2) !important;
+    background: rgba(59, 130, 246, .18) !important;
+    color: #ffffff !important;
+}
+
+/* La première carte utilise un contenu imbriqué. */
+#projets .project-card-linguistique > .project-card-content {
+    display: flex !important;
+    flex: 1 !important;
+    flex-direction: column !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+}
+
+@media (max-width: 640px) {
+    #projets .project-card-featured {
+        min-height: 420px !important;
+    }
+}
+
+/* Retour au fond bleu sombre précédent, en conservant le nouveau contenu. */
+#projets .project-card-featured {
+    background: #0b162d !important;
+}
+
+#projets .project-card-featured > .project-cover {
+    background: #172554 !important;
+}
+
+/* Couleurs des technologies et actions comme dans la capture de référence. */
+#projets .project-card-featured .project-techs span {
+    border: 1px solid rgba(59, 130, 246, .65) !important;
+    color: #60a5fa !important;
+    background: rgba(12, 27, 55, .92) !important;
+}
+
+#projets .project-card-featured .btn-demo,
+#projets .project-card-featured .btn-github {
+    border: 1px solid var(--accent) !important;
+    background: var(--accent) !important;
+    color: #ffffff !important;
+}
+
+#projets .project-card-featured .btn-demo:hover,
+#projets .project-card-featured .btn-github:hover {
+    background: var(--accent2) !important;
+}
+
+/* Les technologies restent dans le contenu, jamais sur l’image. */
+#projets .project-card-featured .project-techs {
+    position: static !important;
+    width: auto !important;
+    margin: 12px 0 0 !important;
+    padding: 0 !important;
+    min-height: 34px;
+    background: transparent !important;
+}
+
+#projets .project-card-featured .project-techs span {
+    padding: 5px 10px !important;
+    border-radius: 999px !important;
+}
+
+/* Boutons classiques, propres et lisibles. */
+#projets .project-card-featured .btn-demo,
+#projets .project-card-featured .btn-github {
+    min-height: 36px;
+    padding: 8px 14px;
+    border-radius: 8px !important;
+    font-size: .76rem;
+    font-weight: 700;
+}
+
+#projets .project-card-featured .project-footer {
+    gap: 10px;
+    padding-top: 14px !important;
+}
+
+/* Correction finale : aucun texte ne doit se superposer à l’image. */
+#projets .project-card-featured:not(.project-card-linguistique) {
+    min-height: 0 !important;
+    height: auto !important;
+}
+
+#projets .project-card-featured:not(.project-card-linguistique) > .project-cover {
+    position: relative !important;
+    inset: auto !important;
+    z-index: auto !important;
+    height: 205px !important;
+    margin: 0 -20px 18px !important;
+}
+
+#projets .project-card-featured:not(.project-card-linguistique) > .project-desc,
+#projets .project-card-featured:not(.project-card-linguistique) > .project-techs,
+#projets .project-card-featured:not(.project-card-linguistique) > .project-footer {
+    position: static !important;
+    z-index: auto !important;
+    width: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+}
+
+#projets .project-card-featured:not(.project-card-linguistique) > .project-desc {
+    min-height: 0 !important;
+    padding-top: 0 !important;
+    margin-bottom: 12px !important;
+}
+
+#projets .project-card-featured:not(.project-card-linguistique) > .project-techs {
+    margin-top: 8px !important;
+}
+
+#projets .project-card-featured:not(.project-card-linguistique) > .project-footer {
+    margin-top: 14px !important;
+    padding-top: 12px !important;
+    border-top: 1px solid rgba(96, 165, 250, .14);
+}
+
+/* Pastilles de technologies superposées à l’image, comme dans la référence. */
+#projets .project-card-featured .project-techs {
+    position: absolute !important;
+    top: 16px !important;
+    left: 16px !important;
+    z-index: 4 !important;
+    display: flex !important;
+    width: calc(100% - 32px) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    gap: 7px !important;
+    flex-wrap: wrap !important;
+    pointer-events: none;
+}
+
+#projets .project-card-featured .project-techs span {
+    padding: 5px 10px !important;
+    border: 1px solid rgba(148, 163, 184, .82) !important;
+    border-radius: 999px !important;
+    color: #f8fafc !important;
+    background: rgba(3, 7, 18, .84) !important;
+    font-size: .68rem !important;
+    line-height: 1 !important;
+    white-space: nowrap;
+    backdrop-filter: blur(5px);
+}
+
+#projets .project-card-featured > .project-cover {
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+/* Flèches latérales de navigation, comme une vitrine de projets. */
+@media (min-width: 641px) {
+    #projets .project-group {
+        position: relative;
+    }
+
+    #projets .project-pagination {
+        position: absolute;
+        top: 55%;
+        right: -54px;
+        left: -54px;
+        z-index: 5;
+        display: block;
+        height: 0;
+        margin: 0;
+        pointer-events: none;
+    }
+
+    #projets .project-page-status {
+        display: none;
+    }
+
+    #projets .project-page-button {
+        position: absolute;
+        top: -19px;
+        pointer-events: auto;
+        width: 40px;
+        height: 40px;
+        border-color: rgba(96, 165, 250, .45);
+        background: rgba(30, 41, 59, .82);
+        box-shadow: 0 8px 18px rgba(0, 0, 0, .18);
+        font-size: 1.35rem;
+    }
+
+    #projets .project-page-prev { left: 0; }
+    #projets .project-page-next { right: 0; }
+}
+
+@media (max-width: 640px) {
+    #projets .project-pagination {
+        order: 2;
+    }
+
+    #projets .project-page-button {
+        width: 34px;
+        height: 34px;
+    }
+}
+
+/* Les liens GitHub sont regroupés avec les actions de chaque projet. */
+.project-title-row > .project-github {
+    display: none !important;
+}
+
+.project-footer {
+    flex-wrap: wrap;
+}
+
+.btn-github {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    min-height: 34px;
+    padding: 7px 16px;
+    border: 1px solid #0bbf3b;
+    border-radius: 8px;
+    background: #08c43b;
+    color: #ffffff;
+    font-size: .78rem;
+    font-weight: 700;
+    line-height: 1;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background .25s, transform .2s, box-shadow .25s;
+}
+
+.btn-github:hover {
+    background: #0be04a;
+    box-shadow: 0 8px 18px rgba(8, 196, 59, .24);
+    transform: translateY(-2px);
+}
+
+.btn-github svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+}
+
+@media (max-width: 520px) {
+    .project-footer .btn-demo,
+    .project-footer .btn-github {
+        flex: 1 1 140px;
+    }
+}
+
+/* Même identité visuelle verte pour les actions principales. */
+.project-footer .btn-demo {
+    background: #08c43b;
+    border-color: #0bbf3b;
+}
+
+.project-footer .btn-demo:hover {
+    background: #0be04a;
+}
+
+/* Les actions des projets utilisent toutes le même bleu. */
+.project-footer .btn-demo,
+.project-footer .btn-github {
+    background: var(--accent);
+    border-color: var(--accent);
+}
+
+.project-footer .btn-demo:hover,
+.project-footer .btn-github:hover {
+    background: var(--accent2);
+}
+
+/* Les technologies restent foncées comme dans la carte sombre, sans fond blanc. */
+.project-card .project-techs span,
+.project-card-featured .project-techs span {
+    border: 1px solid rgba(59, 130, 246, .62) !important;
+    color: #60a5fa !important;
+    background: rgba(12, 27, 55, .92) !important;
+}
+
+/* Cartes projet en vitrine pleine surface, avec contenu toujours au premier plan. */
+.project-card-featured:not(.project-card-linguistique) {
+    position: relative !important;
+    min-height: 560px !important;
+    overflow: hidden !important;
+    isolation: isolate !important;
+    padding: 0 26px 28px !important;
+    background: #0b162d !important;
+}
+
+.project-card-featured:not(.project-card-linguistique) > .project-cover {
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    background: #0b162d !important;
+}
+
+.project-card-featured:not(.project-card-linguistique) > .project-cover::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(180deg, rgba(5, 12, 28, .16) 0%, rgba(5, 12, 28, .25) 35%, rgba(5, 12, 28, .97) 100%);
+}
+
+.project-card-featured:not(.project-card-linguistique) > .project-cover img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+}
+
+.project-card-featured:not(.project-card-linguistique) > .project-title-row,
+.project-card-featured:not(.project-card-linguistique) > .project-main-title-row {
+    position: relative !important;
+    z-index: 2 !important;
+    margin: 0 -26px !important;
+    padding: 24px 26px 16px !important;
+    background: rgba(7, 18, 40, .72) !important;
+    backdrop-filter: blur(5px) !important;
+}
+
+.project-card-featured:not(.project-card-linguistique) > .project-desc {
+    position: relative !important;
+    z-index: 2 !important;
+    margin: auto -26px 0 !important;
+    padding: 210px 26px 0 !important;
+    color: #dbeafe !important;
+    background: linear-gradient(180deg, transparent 0%, rgba(7, 18, 40, .72) 35%, rgba(7, 18, 40, .97) 100%) !important;
+}
+
+.project-card-featured:not(.project-card-linguistique) > .project-techs,
+.project-card-featured:not(.project-card-linguistique) > .project-footer {
+    position: relative !important;
+    z-index: 2 !important;
+    margin-inline: -26px !important;
+    padding: 0 26px !important;
+    background: rgba(7, 18, 40, .97) !important;
+}
+
+/* Format compact pour éviter les espaces verticaux inutiles. */
+.project-card-featured.project-card-linguistique {
+    min-height: 0 !important;
+    padding-bottom: 14px !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.project-card-featured.project-card-linguistique > .project-title-row {
+    padding-top: 14px !important;
+    padding-bottom: 10px !important;
+}
+
+.project-card-featured.project-card-linguistique > .project-card-content {
+    display: block !important;
+    flex: none !important;
+    margin-top: auto !important;
+    padding-top: 12px !important;
+}
+
+.project-card-featured.project-card-linguistique .project-desc {
+    margin-bottom: 14px !important;
+    line-height: 1.5;
+}
+
+.project-card-featured.project-card-linguistique .project-techs {
+    gap: 6px;
+    margin-bottom: 12px;
+}
+
+.project-card-featured.project-card-linguistique .project-footer {
+    gap: 8px;
+    margin-top: 0 !important;
+    padding-top: 8px !important;
+}
+
+/* Présentation normale finale pour toutes les images de projets. */
+.project-card-featured {
+    position: relative !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
+    isolation: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    padding: 0 26px 28px !important;
+    background: var(--card) !important;
+}
+
+.project-card-featured > .project-cover {
+    position: relative !important;
+    inset: auto !important;
+    z-index: auto !important;
+    width: calc(100% + 52px) !important;
+    height: 205px !important;
+    margin: 0 -26px 24px !important;
+    background: #172554 !important;
+}
+
+.project-card-featured > .project-cover::after {
+    display: none !important;
+}
+
+.project-card-featured > .project-cover img {
+    position: relative !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    object-position: center !important;
+}
+
+.project-card-featured > .project-title-row,
+.project-card-featured > .project-main-title-row,
+.project-card-featured > .project-desc,
+.project-card-featured > .project-techs,
+.project-card-featured > .project-footer {
+    position: static !important;
+    z-index: auto !important;
+    width: auto !important;
+    margin-inline: 0 !important;
+    padding-inline: 0 !important;
+    background: transparent !important;
+    backdrop-filter: none !important;
+}
+
+.project-card-featured > .project-desc {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+.project-card-featured.project-card-linguistique {
+    min-height: 0 !important;
+    padding-bottom: 28px !important;
+    border: 1px solid var(--border) !important;
+    background: var(--card) !important;
+    box-shadow: none !important;
+}
+
+.project-card-featured.project-card-linguistique > .project-cover {
+    position: relative !important;
+    inset: auto !important;
+    z-index: auto !important;
+    width: calc(100% + 52px) !important;
+    height: 205px !important;
+    margin: 0 -26px 24px !important;
+    background: linear-gradient(135deg, #eff6ff, #dbeafe) !important;
+}
+
+.project-card-featured.project-card-linguistique > .project-cover img {
+    object-fit: contain !important;
+}
+
+.project-card-featured.project-card-linguistique > .project-title-row {
+    margin: 0 0 10px !important;
+    padding: 0 !important;
+    background: transparent !important;
+}
+
+.project-card-featured.project-card-linguistique > .project-card-content {
+    display: block !important;
+    flex: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+}
+
+@media (max-width: 768px) {
+    .project-card-featured > .project-cover,
+    .project-card-featured.project-card-linguistique > .project-cover {
+        width: calc(100% + 36px) !important;
+        margin-inline: -18px !important;
+        height: 190px !important;
+    }
+
+    .project-card-featured,
+    .project-card-featured.project-card-linguistique {
+        padding-inline: 18px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .project-card-featured:not(.project-card-linguistique) {
+        min-height: 600px !important;
+        padding-inline: 18px !important;
+    }
+
+    .project-card-featured:not(.project-card-linguistique) > .project-title-row,
+    .project-card-featured:not(.project-card-linguistique) > .project-main-title-row,
+    .project-card-featured:not(.project-card-linguistique) > .project-desc,
+    .project-card-featured:not(.project-card-linguistique) > .project-techs,
+    .project-card-featured:not(.project-card-linguistique) > .project-footer {
+        margin-inline: -18px !important;
+        padding-inline: 18px !important;
+    }
+
+    .project-card-featured.project-card-linguistique {
+        min-height: 0 !important;
+    }
+
+    .project-card-featured.project-card-linguistique > .project-card-content {
+        padding-top: 16px !important;
+    }
+}
+
+/* Surcharge finale : les technologies restent sur l’image, sans déplacer le contenu. */
+#projets .project-card-featured {
+    position: relative !important;
+}
+
+#projets .project-card-featured .project-techs {
+    position: absolute !important;
+    top: 16px !important;
+    left: 16px !important;
+    z-index: 20 !important;
+    display: flex !important;
+    width: calc(100% - 32px) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    gap: 7px !important;
+    flex-wrap: wrap !important;
+    pointer-events: none;
+}
+
+#projets .project-card-featured .project-techs span {
+    padding: 5px 10px !important;
+    border: 1px solid rgba(148, 163, 184, .82) !important;
+    border-radius: 999px !important;
+    color: #f8fafc !important;
+    background: rgba(3, 7, 18, .84) !important;
+    font-size: .68rem !important;
+    line-height: 1 !important;
+    backdrop-filter: blur(5px);
+}
+
+/* Surcharge la plus récente : les technologies sont dans le contenu. */
+#projets .project-card-featured .project-techs {
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    z-index: auto !important;
+    width: auto !important;
+    margin: 10px 0 0 !important;
+    padding: 0 !important;
+    gap: 6px !important;
+    pointer-events: auto !important;
+}
+
+#projets .project-card-featured .project-techs span {
+    padding: 4px 9px !important;
+    border: 1px solid rgba(59, 130, 246, .62) !important;
+    color: #60a5fa !important;
+    background: rgba(12, 27, 55, .92) !important;
+    font-size: .64rem !important;
+    line-height: 1.1 !important;
+}
+
+/* Règle finale active : les pastilles sont sur l’image. */
+#projets .project-card-featured .project-techs {
+    position: absolute !important;
+    top: 12px !important;
+    left: 12px !important;
+    z-index: 100 !important;
+    width: calc(100% - 24px) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    gap: 6px !important;
+    pointer-events: none !important;
+}
+
+#projets .project-card-featured .project-techs span {
+    color: #f8fafc !important;
+    border-color: rgba(148, 163, 184, .86) !important;
+    background: rgba(3, 7, 18, .86) !important;
+}
+
+/* Surcharge de spécificité : les pastilles restent bien dans la zone image. */
+#projets .project-card-featured:not(.project-card-linguistique) > .project-techs,
+#projets .project-card-featured.project-card-linguistique .project-techs {
+    position: absolute !important;
+    top: 12px !important;
+    left: 12px !important;
+    z-index: 100 !important;
+    width: calc(100% - 24px) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    pointer-events: none !important;
+}
+
+#projets .project-card-featured.project-card-linguistique > .project-card-content {
+    position: static !important;
+}
+
+/* Couleurs finales des pastilles, comme dans la première capture. */
+#projets .project-card-featured .project-techs span {
+    border-color: rgba(59, 130, 246, .65) !important;
+    color: #60a5fa !important;
+    background: rgba(12, 27, 55, .94) !important;
+}
+
+/* La description de Linguistique Régionale reste entièrement visible. */
+#projets .project-card-featured.project-card-linguistique .project-desc {
+    display: block !important;
+    max-height: none !important;
+    overflow: visible !important;
+    -webkit-line-clamp: unset !important;
+    line-height: 1.5 !important;
+}
+
+/* Toutes les descriptions de projets restent entièrement lisibles. */
+#projets .project-card-featured .project-desc {
+    display: block !important;
+    max-height: none !important;
+    overflow: visible !important;
+    -webkit-line-clamp: unset !important;
+    line-height: 1.5 !important;
+}
+
+#projets .project-card-featured {
+    height: auto !important;
+    min-height: 0 !important;
+}
+
+/* Catégorie principale dans le coin supérieur droit de la carte. */
+#projets .project-card-featured .project-icon[data-category] {
+    position: absolute !important;
+    top: 12px !important;
+    right: 14px !important;
+    z-index: 40 !important;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    width: auto !important;
+    min-width: 34px;
+    height: 32px !important;
+    margin: 0 !important;
+    padding: 5px 9px !important;
+    border: 1px solid rgba(96, 165, 250, .6) !important;
+    border-radius: 999px !important;
+    background: rgba(5, 18, 40, .86) !important;
+    color: #93c5fd !important;
+    backdrop-filter: blur(6px);
+}
+
+#projets .project-card-featured .project-icon[data-category] svg {
+    width: 17px !important;
+    height: 17px !important;
+    flex: 0 0 17px;
+}
+
+#projets .project-card-featured .project-icon[data-category]::after {
+    content: attr(data-category);
+    color: #dbeafe;
+    font-size: .68rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+/* Rend le libellé de catégorie visible même sans JavaScript. */
+#projets .project-card-featured .project-icon[title]::after {
+    content: attr(title) !important;
+    display: inline-block !important;
+    margin-left: 7px;
+    color: #dbeafe;
+    font-size: .68rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+/* Retour à l’affichage précédent : icône ronde et catégorie centrées. */
+#projets .project-card-featured .project-icon[data-category],
+#projets .project-card-featured .project-icon[title] {
+    position: static !important;
+    display: inline-flex !important;
+    flex: 0 0 100% !important;
+    align-items: center;
+    justify-content: center;
+    width: 100% !important;
+    min-width: 0 !important;
+    height: auto !important;
+    min-height: 42px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    color: #ffffff !important;
+    backdrop-filter: none !important;
+}
+
+#projets .project-card-featured .project-icon[data-category] svg,
+#projets .project-card-featured .project-icon[title] svg {
+    width: 36px !important;
+    height: 36px !important;
+    padding: 7px !important;
+    border: 1px solid rgba(255, 255, 255, .95) !important;
+    border-radius: 50% !important;
+}
+
+#projets .project-card-featured .project-icon[data-category]::after,
+#projets .project-card-featured .project-icon[title]::after {
+    content: attr(title) !important;
+    display: inline-block !important;
+    margin-left: 10px !important;
+    color: #ffffff !important;
+    font-size: .92rem !important;
+    font-weight: 700 !important;
+    white-space: nowrap;
+}
+
+#projets .project-card-featured .project-icon svg {
+    fill: none !important;
+    stroke: currentColor !important;
+    stroke-width: 1.8 !important;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    width: 36px !important;
+    height: 36px !important;
+    padding: 7px !important;
+    border: 1px solid rgba(96, 165, 250, .7) !important;
+    border-radius: 50% !important;
+    flex: 0 0 36px !important;
+    box-sizing: border-box !important;
+}
+
+/* En-tête identique pour aligner toutes les cartes sur les mêmes repères. */
+#projets .project-card-featured > .project-title-row {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 8px !important;
+    min-height: 112px !important;
+    margin: 0 0 12px !important;
+    padding: 16px 0 0 !important;
+    background: transparent !important;
+}
+
+#projets .project-card-featured > .project-title-row .project-icon {
+    flex: 0 0 36px !important;
+    width: 36px !important;
+    min-width: 36px !important;
+    height: 36px !important;
+    min-height: 36px !important;
+}
+
+#projets .project-card-featured > .project-title-row .project-icon svg {
+    width: 36px !important;
+    height: 36px !important;
+}
+
+#projets .project-card-featured > .project-title-row h3 {
+    flex: 0 0 auto !important;
+    width: 100% !important;
+    margin: 0 !important;
+    text-align: center !important;
+}
+
+/* Un bouton unique conserve une largeur naturelle. */
+#projets .project-card-featured .project-footer .btn-demo:only-child,
+#projets .project-card-featured .project-footer .btn-github:only-child {
+    flex: 0 0 auto !important;
+    width: auto !important;
+}
+
+.project-cover-gestion {
+    background: #e7edf5 !important;
+}
+
+.project-cover-gestion img {
+    object-fit: cover !important;
+    object-position: center !important;
+}
+
+
+.project-filter-label {
+    display: block;
+    margin-top: 22px;
+    color: var(--muted);
+    font-size: .78rem;
+    font-weight: 600;
+}
+
+.project-category-filter {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+}
+
+.project-category-button {
+    padding: 8px 14px;
+    border: 1px solid rgba(96, 165, 250, .42);
+    border-radius: 999px;
+    background: rgba(12, 27, 55, .88);
+    color: #93c5fd;
+    font: inherit;
+    font-size: .78rem;
+    cursor: pointer;
+    transition: background .2s, border-color .2s, color .2s, transform .2s;
+}
+
+.project-category-button:hover,
+.project-category-button.active {
+    border-color: var(--accent2);
+    background: var(--accent);
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
+#projets .project-card[hidden] {
+    display: none !important;
+}
+
+
+
+
+

@@ -22,7 +22,6 @@ function updateThemeButton() {
         btn.title = lightMode ? "Activer le mode sombre" : "Activer le mode clair";
     });
 }
-
 themeToggles.forEach(btn => btn.addEventListener("click", () => {
     const lightMode = document.body.classList.toggle("light-theme");
     localStorage.setItem("portfolio-theme", lightMode ? "light" : "dark");
@@ -217,6 +216,19 @@ if (timeline) {
 const formationTimeline = document.querySelector("#formation .formation-timeline");
 if (formationTimeline) {
     new MutationObserver(updateTimelineNumbers).observe(formationTimeline, { childList: true });
+}
+
+// Animation individuelle des cartes d'expérience et de formation au défilement.
+const timelineItems = document.querySelectorAll("#experiences .timeline-item, #formation .formation-timeline .timeline-item");
+if (timelineItems.length) {
+    timelineItems.forEach((item) => item.classList.add("scroll-reveal"));
+    const timelineObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            entry.target.classList.toggle("in-view", entry.isIntersecting);
+        });
+    }, { threshold: 0.18, rootMargin: "0px 0px -8% 0px" });
+
+    timelineItems.forEach((item) => timelineObserver.observe(item));
 }
 
 // Numérotation automatique des catégories de compétences.
@@ -519,7 +531,7 @@ if (btnSend) {
             .then(() => {
                 showAlertDialog("Votre message a été envoyé avec succès.", "Message envoyé");
                 btnSend.textContent = "Message envoyé ✓";
-                btnSend.style.background = "#22c55e";
+                btnSend.style.background = "#2563eb";
 
                 setTimeout(() => {
                     if (nomInput) nomInput.value = "";
@@ -652,3 +664,166 @@ if (qrContainer && window.QRCode) {
         correctLevel: QRCode.CorrectLevel.H
     });
 }
+
+// Navigation des projets : trois cartes visibles par page et par groupe.
+document.querySelectorAll(".project-group").forEach((group) => {
+    const cards = [...group.querySelectorAll(":scope > .project-card")];
+    const pagination = group.querySelector(".project-pagination");
+    if (!pagination || cards.length <= 3) return;
+
+    const previousButton = pagination.querySelector(".project-page-prev");
+    const nextButton = pagination.querySelector(".project-page-next");
+    const status = pagination.querySelector(".project-page-status");
+    const cardsPerPage = 3;
+    const pageCount = Math.ceil(cards.length / cardsPerPage);
+    let currentPage = 0;
+
+    const renderPage = () => {
+        const firstCard = currentPage * cardsPerPage;
+        cards.forEach((card, index) => {
+            card.hidden = index < firstCard || index >= firstCard + cardsPerPage;
+        });
+        previousButton.disabled = currentPage === 0;
+        nextButton.disabled = currentPage === pageCount - 1;
+        status.textContent = `${currentPage + 1} / ${pageCount}`;
+    };
+
+    previousButton.addEventListener("click", () => {
+        if (currentPage > 0) {
+            currentPage -= 1;
+            renderPage();
+        }
+    });
+
+    nextButton.addEventListener("click", () => {
+        if (currentPage < pageCount - 1) {
+            currentPage += 1;
+            renderPage();
+        }
+    });
+
+    renderPage();
+});
+
+// Une seule catégorie principale par projet ; les technologies restent secondaires.
+const primaryProjectCategories = [
+    "Mobile", "IA", "Mobile", "Mobile", "Web", "Logiciels de bureau",
+    "Web", "Web", "IoT", "Mobile", "IoT", "IoT"
+];
+
+document.querySelectorAll("#projets .project-card").forEach((card, index) => {
+    const category = primaryProjectCategories[index];
+    const icon = card.querySelector(".project-icon");
+    if (category && icon) {
+        card.dataset.category = category;
+        icon.dataset.category = category;
+        icon.setAttribute("title", category);
+        icon.setAttribute("aria-label", `Catégorie : ${category}`);
+    }
+});
+
+const projectCategoryButtons = document.querySelectorAll(".project-category-button");
+const projectCards = [...document.querySelectorAll("#projets .project-card")];
+
+const filterProjects = (selectedCategory) => {
+    projectCards.forEach((card, index) => {
+        const cardCategory = card.dataset.category || primaryProjectCategories[index];
+        const shouldShow = selectedCategory === "all" || cardCategory === selectedCategory;
+        card.hidden = !shouldShow;
+        card.classList.toggle("project-filter-hidden", !shouldShow);
+        if (shouldShow) {
+            card.style.removeProperty("display");
+        } else {
+            card.style.setProperty("display", "none", "important");
+        }
+    });
+};
+
+projectCategoryButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+        const selectedCategory = button.dataset.categoryFilter;
+        projectCategoryButtons.forEach((item) => {
+            const isActive = item === button;
+            item.classList.toggle("active", isActive);
+            item.setAttribute("aria-pressed", isActive ? "true" : "false");
+        });
+        filterProjects(selectedCategory);
+    });
+});
+
+filterProjects("all");
+
+// Icônes réelles pour les catégories de la section Outils.
+const categoryIcons = {
+    "Outils": '<path d="m14.7 6.3 3-3 3 3-3 3M13 8l3 3-7.5 7.5a2.1 2.1 0 0 1-3-3zM4 20h5"/>',
+    "Framework": '<path d="M4 6h16M4 12h16M4 18h16M8 4v4M16 10v4M10 16v4"/>',
+    "Base de données": '<ellipse cx="12" cy="5" rx="7" ry="3"/><path d="M5 5v7c0 1.7 3.1 3 7 3s7-1.3 7-3V5M5 12v7c0 1.7 3.1 3 7 3s7-1.3 7-3v-7"/>',
+    "Big Data": '<path d="M4 19V5M4 19h16M7 15l3-4 3 2 5-7"/>',
+    "Cybersécurité": '<path d="M12 3 20 6v6c0 5-3.4 8-8 9-4.6-1-8-4-8-9V6zM9 12l2 2 4-5"/>',
+    "Réseaux": '<circle cx="12" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/><path d="M12 7v5M10.5 13.5 6.5 18M13.5 13.5l4 4.5"/>',
+    "Microcontrôleur": '<rect x="7" y="7" width="10" height="10" rx="1"/><path d="M9 3v4M12 3v4M15 3v4M9 17v4M12 17v4M15 17v4M3 9h4M3 12h4M3 15h4M17 9h4M17 12h4M17 15h4"/>',
+    "IA": '<path d="M9 9h6v6H9zM5 5h3v3H5zM16 5h3v3h-3zM5 16h3v3H5zM16 16h3v3h-3zM8 6.5h8M6.5 8v8M17.5 8v8M8 17.5h8"/>'
+};
+
+document.querySelectorAll(".tool-category-row h4").forEach((heading) => {
+    const name = heading.textContent.trim();
+    if (categoryIcons[name]) {
+        heading.insertAdjacentHTML("afterbegin", `<svg class="category-icon" viewBox="0 0 24 24" aria-hidden="true">${categoryIcons[name]}</svg>`);
+    }
+});
+
+const technologyIcons = {
+    "VirtualBox": "devicon-virtualbox-plain", "Git": "devicon-git-plain", "GitHub": "devicon-github-original",
+    "Docker": "devicon-docker-plain", "Canva": "devicon-canva-original", "Gemini": "devicon-google-plain",
+    "Jenkins / CI/CD": "devicon-jenkins-line", "Kubernetes": "devicon-kubernetes-plain", "Pipeline": "devicon-gitlab-plain",
+    "SonarQube": "devicon-sonarqube-plain", "Render": "devicon-grafana-plain", "Vercel": "devicon-vercel-original",
+    "Nexus": "devicon-apache-plain", "Streamlit": "devicon-streamlit-plain", "API Partner": "devicon-fastapi-plain",
+    "SMTP": "devicon-nginx-original", "React": "devicon-react-original", "Node.js": "devicon-nodejs-plain",
+    "FastAPI": "devicon-fastapi-plain", "Spring Boot": "devicon-spring-original", "Android": "devicon-android-plain",
+    "Flutter": "devicon-flutter-plain", "MySQL": "devicon-mysql-plain", "PostgreSQL": "devicon-postgresql-plain",
+    "MongoDB": "devicon-mongodb-plain", "SQLite": "devicon-sqlite-plain", "Supabase": "devicon-supabase-plain",
+    "Hadoop": "devicon-hadoop-plain", "Apache Spark": "devicon-apachespark-plain", "Kali Linux": "devicon-linux-plain", "OpenCV": "devicon-opencv-plain",
+    "Arduino": "devicon-arduino-plain", "ESP32": "devicon-embeddedc-plain", "Raspberry Pi": "devicon-raspberrypi-plain", "Python": "devicon-python-plain",
+    "TensorFlow": "devicon-tensorflow-original"
+};
+
+const technologySvgIcons = {
+    "Machine Learning": '<path d="M8 4h8v5H8zM4 15h6v5H4zM14 15h6v5h-6zM12 9v3M7 12h10M7 12v3M17 12v3"/>',
+    "Deep Learning": '<circle cx="12" cy="12" r="3"/><circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="5" cy="18" r="2"/><circle cx="19" cy="18" r="2"/><path d="m7 7 3 3M17 7l-3 3M7 17l3-3M17 17l-3-3"/>',
+    "TCP/IP": '<circle cx="12" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/><path d="M12 7v5M10.5 13.5 6.5 18M13.5 13.5l4 4.5"/>',
+    "Wi-Fi": '<path d="M3 9a14 14 0 0 1 18 0M6 13a9 9 0 0 1 12 0M9 17a4 4 0 0 1 6 0"/><circle cx="12" cy="20" r="1"/>',
+    "Bluetooth": '<path d="m12 3 5 5-5 4 5 4-5 5V3M4 8l8 8M4 16l8-8"/>',
+    "LoRaWAN": '<path d="M5 18a10 10 0 0 1 14 0M8 14a6 6 0 0 1 8 0M11 10a2 2 0 0 1 2 0"/><circle cx="12" cy="20" r="1"/>',
+    "Nmap": '<path d="M12 3 20 6v6c0 5-3.4 8-8 9-4.6-1-8-4-8-9V6zM9 12h6M12 9v6"/>',
+    "Wireshark": '<path d="M4 18c2-5 4-8 8-8s6 3 8 8M7 7c1.5 1 2.5 2 3 4M17 7c-1.5 1-2.5 2-3 4"/>',
+    "Metasploit": '<path d="M12 3a7 7 0 1 0 7 7M12 7v5l3 3M12 3v3M5 5l2 2"/>',
+    "Social Engineering": '<circle cx="12" cy="8" r="3"/><path d="M5 20c.8-4 3-6 7-6s6.2 2 7 6M4 11h3M17 11h3"/>'
+};
+
+const aiCategory = [...document.querySelectorAll(".tool-category-row")].find((row) => row.querySelector("h4")?.textContent.trim() === "IA");
+if (aiCategory) {
+    aiCategory.querySelectorAll(".category-items > span").forEach((item) => {
+        if (["Python", "Streamlit"].includes(item.textContent.trim())) item.remove();
+    });
+    aiCategory.querySelector(".category-items")?.insertAdjacentHTML("beforeend", "<span>OpenCV</span>");
+}
+
+const microcontrollerCategory = [...document.querySelectorAll(".tool-category-row")].find((row) => row.querySelector("h4")?.textContent.trim() === "Microcontrôleur");
+if (microcontrollerCategory) {
+    microcontrollerCategory.querySelectorAll(".category-items > span").forEach((item) => {
+        if (["IR Remote", "LED Matrix"].includes(item.textContent.trim())) item.remove();
+    });
+    microcontrollerCategory.querySelector(".category-items")?.insertAdjacentHTML("beforeend", "<span>Raspberry Pi</span>");
+}
+
+document.querySelectorAll(".category-items > span").forEach((item) => {
+    const name = item.textContent.trim();
+    if (technologySvgIcons[name]) {
+        item.insertAdjacentHTML("afterbegin", `<svg class="category-item-icon category-item-svg" viewBox="0 0 24 24" aria-hidden="true">${technologySvgIcons[name]}</svg>`);
+        return;
+    }
+    const iconClass = technologyIcons[name] || "devicon-code-plain";
+    item.insertAdjacentHTML("afterbegin", `<i class="${iconClass} colored category-item-icon" aria-hidden="true"></i>`);
+});
+
+

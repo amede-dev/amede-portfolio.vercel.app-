@@ -7,9 +7,10 @@ const portfolioData = {
     projects: [
         {
             title: "Linguistique Régionale",
-            description: "Application mobile dédiée à la découverte, la recherche et la contribution autour des mots et expressions des régions et dialectes de Madagascar.",
+            description: "Solution Mobile dédiée à la découverte, à la recherche et à la contribution autour des mots et expressions des régions et dialectes de Madagascar.",
             demo: "https://github.com/amede-dev/Linguistique_Regionnale_frontend",
             source: "https://github.com/amede-dev/Linguistique_Regionnale_backend",
+            download: "assets/apps/Linguistique_Regionnale.apk",
             technologies: ["Flutter", "Dart", "Spring Boot", "Java", "Supabase"]
         },
         {

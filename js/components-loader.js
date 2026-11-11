@@ -33,7 +33,9 @@ async function loadComponents() {
     document.body.appendChild(dataScript);
 
     const appScript = document.createElement("script");
-    appScript.src = appUrl.href;
+    const appScriptUrl = new URL(appUrl.href);
+    appScriptUrl.searchParams.set("v", Date.now().toString());
+    appScript.src = appScriptUrl.href;
     document.body.appendChild(appScript);
 }
 
